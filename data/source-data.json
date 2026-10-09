@@ -1,24 +1,35 @@
 {
   "schemaVersion": 1,
-  "generatedAt": null,
+  "generatedAt": "2026-10-09T08:57:44Z",
   "updatedBy": "daily-election-data-refresh",
-  "sources": {
-    "kalshi": {
-      "name": "Kalshi odds",
-      "url": "https://docs.kalshi.com/getting_started/quick_start_market_data"
-    },
-    "rcp": {
-      "name": "RCP polls",
-      "url": "https://www.realclearpolitics.com/polls/"
-    },
-    "sabato": {
-      "name": "Sabato’s Crystal Ball",
-      "url": "https://centerforpolitics.org/crystalball/"
-    },
-    "cook": {
-      "name": "Cook Political Report",
-      "url": "https://www.cookpolitical.com/ratings/senate-race-ratings"
-    }
+  "refresh": {
+    "attemptedAt": "2026-10-09T08:57:44Z",
+    "notes": "Kalshi values were verified on the official public midterm market page because the public API endpoint was blocked in this refresh environment. Sabato and Cook direct pages returned HTTP 403; no values were invented.",
+    "failures": [
+      {"source":"kalshi-api","status":"blocked","error":"Calls to external-api.kalshi.com were blocked by the refresh environment.","at":"2026-10-09T08:57:44Z"},
+      {"source":"sabato","status":"unavailable","error":"Official 2026 Senate and Governor pages returned HTTP 403.","at":"2026-10-09T08:57:44Z"},
+      {"source":"cook","status":"unavailable","error":"Official 2026 Senate and Governor ratings pages returned HTTP 403.","at":"2026-10-09T08:57:44Z"}
+    ]
   },
-  "races": {}
+  "sources": {
+    "kalshi": {"name":"Kalshi odds","url":"https://kalshi.com/category/elections/midterms/states","apiUrl":"https://external-api.kalshi.com/trade-api/v2/markets","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z"},
+    "rcp": {"name":"RCP polls","url":"https://www.realclearpolling.com/maps/senate/2026/toss-up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z"},
+    "sabato": {"name":"Sabatoâs Crystal Ball","url":"https://centerforpolitics.org/crystalball/2026-senate/","status":"unavailable","fetchedAt":"2026-10-09T08:57:44Z","error":"HTTP 403"},
+    "cook": {"name":"Cook Political Report","url":"https://www.cookpolitical.com/ratings/senate-race-ratings/565701","status":"unavailable","fetchedAt":"2026-10-09T08:57:44Z","error":"HTTP 403"}
+  },
+  "races": {
+    "texas|senate": {"state":"Texas","office":"Senate","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Talarico 64%; Paxton 36%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/polls/senate/general/2026/texas/talarico-vs-paxton","value":"Talarico 48.1%; Paxton 45.3%; Talarico +2.8; Rating: Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-05","note":"RCP average dated 9/12â10/5."}}},
+    "maine|senate": {"state":"Maine","office":"Senate","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Jackson 56%; Collins 44%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/polls/senate/general/2026/maine/collins-vs-jackson","value":"Jackson 48.1%; Collins 47.4%; Jackson +0.7; Rating: Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-04","note":"RCP average dated 9/14â10/4."}}},
+    "ohio|senate": {"state":"Ohio","office":"Senate","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Brown 61%; Husted 39%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/polls/senate/special-election/2026/ohio/husted-vs-brown","value":"Brown 47.3%; Husted 44.2%; Brown +3.1; Rating: Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-06","note":"RCP average dated 9/1â10/6."}}},
+    "michigan|senate": {"state":"Michigan","office":"Senate","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"El-Sayed 68%; Rogers 32%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/polls/senate/general/2026/michigan/rogers-vs-el-sayed","value":"El-Sayed 48.1%; Rogers 44.9%; El-Sayed +3.2; Rating: Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-06","note":"RCP average dated 9/15â10/6."}}},
+    "iowa|senate": {"state":"Iowa","office":"Senate","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Turek 44%; Hinson 56%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/polls/senate/general/2026/iowa/turek-vs-hinson","value":"Turek 45.9%; Hinson 45.2%; Turek +0.7; Rating: Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-05","note":"RCP average dated 9/9â10/5."}}},
+    "kansas|senate": {"state":"Kansas","office":"Senate","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Hamilton 38%; Marshall 62%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/maps/senate/2026/toss-up","value":"Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-09","note":"RCP map classification; no race average captured."}}},
+    "alaska|senate": {"state":"Alaska","office":"Senate","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Democrat 74%; Republican 26%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi party-level market; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/maps/senate/2026/toss-up","value":"Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-09","note":"RCP map classification; no race average captured."}}},
+    "nebraska|senate": {"state":"Nebraska","office":"Senate","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Osborn 28%; Ricketts 72%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/maps/senate/2026/toss-up","value":"Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-09","note":"RCP map classification; no race average captured."}}},
+    "ohio|governor": {"state":"Ohio","office":"Governor","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Acton 70%; Ramaswamy 30%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/maps/governor/2026/toss-up","value":"Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-09","note":"RCP Governor map classification."}}},
+    "texas|governor": {"state":"Texas","office":"Governor","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Hinojosa 26%; Abbott 74%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/maps/governor/2026/toss-up","value":"Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-09","note":"RCP Governor map classification."}}},
+    "nevada|governor": {"state":"Nevada","office":"Governor","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Ford 51%; Lombardo 49%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/maps/governor/2026/toss-up","value":"Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-09","note":"RCP Governor map classification."}}},
+    "georgia|governor": {"state":"Georgia","office":"Governor","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Bottoms 46%; Jackson 54%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/maps/governor/2026/toss-up","value":"Toss Up","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-09","note":"RCP Governor map classification."}}},
+    "vermont|governor": {"state":"Vermont","office":"Governor","sources":{"kalshi":{"url":"https://kalshi.com/category/elections/midterms/states","value":"Janoo 29%; Scott 71%","status":"verified-page-fallback","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":null,"note":"Official Kalshi page; API endpoint blocked."},"rcp":{"url":"https://www.realclearpolling.com/maps/governor/2026/toss-up","value":"Leans GOP","status":"verified","fetchedAt":"2026-10-09T08:57:44Z","publishedAt":"2026-10-09","note":"RCP Governor map classification."}}}
+  }
 }
