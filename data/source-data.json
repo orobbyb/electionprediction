@@ -1,28 +1,28 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T09:01:39Z",
+  "generatedAt": "2026-10-13T08:59:32Z",
   "updatedBy": "daily-election-data-refresh",
   "refresh": {
-    "attemptedAt": "2026-10-12T09:01:39Z",
+    "attemptedAt": "2026-10-13T08:59:32Z",
     "notes": "Kalshi values were verified on each official race market page because both official public API hosts returned HTTP 403 in this refresh environment. RCP maps and available race pages were rechecked. Sabato and Cook direct pages returned HTTP 403; no values were invented.",
     "failures": [
       {
         "source": "kalshi-api",
         "status": "blocked",
         "error": "Calls to api.elections.kalshi.com and external-api.kalshi.com returned HTTP 403 in the refresh environment.",
-        "at": "2026-10-12T09:01:39Z"
+        "at": "2026-10-13T08:59:32Z"
       },
       {
         "source": "sabato",
         "status": "unavailable",
         "error": "Official 2026 Senate and Governor pages returned HTTP 403.",
-        "at": "2026-10-12T09:01:39Z"
+        "at": "2026-10-13T08:59:32Z"
       },
       {
         "source": "cook",
         "status": "unavailable",
         "error": "Official 2026 Senate and Governor ratings pages returned HTTP 403.",
-        "at": "2026-10-12T09:01:39Z"
+        "at": "2026-10-13T08:59:32Z"
       }
     ]
   },
@@ -32,26 +32,26 @@
       "url": "https://kalshi.com/category/elections/midterms/states",
       "apiUrl": "https://external-api.kalshi.com/trade-api/v2/markets",
       "status": "verified-page-fallback",
-      "fetchedAt": "2026-10-12T09:01:39Z"
+      "fetchedAt": "2026-10-13T08:59:32Z"
     },
     "rcp": {
       "name": "RCP polls",
       "url": "https://www.realclearpolling.com/maps/senate/2026/toss-up",
       "status": "verified",
-      "fetchedAt": "2026-10-12T09:01:39Z"
+      "fetchedAt": "2026-10-13T08:59:32Z"
     },
     "sabato": {
       "name": "Sabato's Crystal Ball",
       "url": "https://centerforpolitics.org/crystalball/2026-senate/",
       "status": "unavailable",
-      "fetchedAt": "2026-10-12T09:01:39Z",
+      "fetchedAt": "2026-10-13T08:59:32Z",
       "error": "HTTP 403"
     },
     "cook": {
       "name": "Cook Political Report",
       "url": "https://www.cookpolitical.com/ratings/senate-race-ratings/565701",
       "status": "unavailable",
-      "fetchedAt": "2026-10-12T09:01:39Z",
+      "fetchedAt": "2026-10-13T08:59:32Z",
       "error": "HTTP 403"
     }
   },
@@ -62,19 +62,19 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senatetx/texas-senate-race/senatetx-26",
-          "value": "Talarico 64%; Paxton 36%",
+          "value": "Talarico 65%; Paxton 35%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/texas/talarico-vs-paxton",
-          "value": "Talarico 48.2%; Paxton 45.2%; Talarico +3.0; Rating: Toss Up",
+          "value": "Talarico 48.1%; Paxton 45.3%; Talarico +2.8; Rating: Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-08",
-          "note": "RCP average dated 9/12-10/8."
+          "note": "RCP average dated 9/18-10/8."
         }
       }
     },
@@ -86,17 +86,17 @@
           "url": "https://kalshi.com/markets/senateohs/special-senate-election-in-ohio/senateohs-26",
           "value": "Brown 60%; Husted 40%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/special-election/2026/ohio/husted-vs-brown",
-          "value": "Brown 47.3%; Husted 44.2%; Brown +3.1; Rating: Toss Up",
+          "value": "Brown 47.4%; Husted 44.3%; Brown +3.1; Rating: Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-06",
-          "note": "RCP average dated 9/1-10/6."
+          "note": "RCP average dated 9/18-10/6."
         }
       }
     },
@@ -106,19 +106,19 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senatemi/michigan-senate-race/senatemi-26",
-          "value": "El-Sayed 68%; Rogers 32%",
+          "value": "El-Sayed 67%; Rogers 33%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/michigan/rogers-vs-el-sayed",
-          "value": "El-Sayed 48.1%; Rogers 45.0%; El-Sayed +3.1; Rating: Toss Up",
+          "value": "El-Sayed 48.4%; Rogers 45.7%; El-Sayed +2.7; Rating: Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-10",
-          "note": "RCP average dated 9/15-10/10."
+          "note": "RCP average dated 9/24-10/10."
         }
       }
     },
@@ -128,19 +128,19 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senateia/iowa-senate-race/senateia-26",
-          "value": "Turek 43%; Hinson 57%",
+          "value": "Turek 42%; Hinson 58%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/iowa/turek-vs-hinson",
-          "value": "Turek 45.8%; Hinson 45.3%; Turek +0.5; Rating: Toss Up",
+          "value": "Turek 46.5%; Hinson 45.9%; Turek +0.6; Rating: Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-06",
-          "note": "RCP average dated 9/9-10/6."
+          "note": "RCP average dated 9/22-10/6."
         }
       }
     },
@@ -150,9 +150,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senateks/kansas-senate-race/senateks-26",
-          "value": "Hamilton 38%; Marshall 62%",
+          "value": "Hamilton 39%; Marshall 61%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -160,7 +160,7 @@
           "url": "https://www.realclearpolling.com/maps/senate/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-09",
           "note": "RCP map classification; no race average captured."
         }
@@ -172,9 +172,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senateak/alaska-senate-race/senateak-26",
-          "value": "Democrat 74%; Republican 26%",
+          "value": "Democrat 75%; Republican 25%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi party-level race market page; API endpoints blocked."
         },
@@ -182,7 +182,7 @@
           "url": "https://www.realclearpolling.com/maps/senate/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-09",
           "note": "RCP map classification; no race average captured."
         }
@@ -194,19 +194,19 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senatene/nebraska-senate-race/senatene-26",
-          "value": "Osborn 27%; Ricketts 72%; Burbank <1%",
+          "value": "Osborn 27%; Ricketts 74%; Burbank <1%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/maps/senate/2026/toss-up",
-          "value": "Toss Up",
+          "value": "Leans GOP",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
-          "publishedAt": "2026-10-09",
-          "note": "RCP map classification; no race average captured."
+          "fetchedAt": "2026-10-13T08:59:32Z",
+          "publishedAt": "2026-10-12",
+          "note": "RCP Senate map classification changed from Toss Up to Leans GOP on 10/12."
         }
       }
     },
@@ -218,7 +218,7 @@
           "url": "https://kalshi.com/markets/govpartyoh/ohio-governor/govpartyoh-26",
           "value": "Acton 68%; Ramaswamy 32%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -226,7 +226,7 @@
           "url": "https://www.realclearpolling.com/maps/governor/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-09",
           "note": "RCP Governor map classification."
         }
@@ -238,9 +238,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/govpartytx/texas-governor/govpartytx-26",
-          "value": "Hinojosa 19%; Abbott 81%",
+          "value": "Hinojosa 20%; Abbott 80%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -248,7 +248,7 @@
           "url": "https://www.realclearpolling.com/maps/governor/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-09",
           "note": "RCP Governor map classification."
         }
@@ -262,7 +262,7 @@
           "url": "https://kalshi.com/markets/govpartynv/nevada-governor/govpartynv-26",
           "value": "Ford 52%; Lombardo 48%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -270,7 +270,7 @@
           "url": "https://www.realclearpolling.com/maps/governor/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-09",
           "note": "RCP Governor map classification."
         }
@@ -284,7 +284,7 @@
           "url": "https://kalshi.com/markets/govpartyga/georgia-governor/govpartyga-26",
           "value": "Bottoms 46%; Jackson 54%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -292,7 +292,7 @@
           "url": "https://www.realclearpolling.com/maps/governor/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-09",
           "note": "RCP Governor map classification."
         }
@@ -304,9 +304,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/govpartyvt/vermont-governor/govpartyvt-26",
-          "value": "Janoo 24%; Scott 76%",
+          "value": "Janoo 25%; Scott 75%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -314,7 +314,7 @@
           "url": "https://www.realclearpolling.com/maps/governor/2026/toss-up",
           "value": "Leans GOP",
           "status": "verified",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-09",
           "note": "RCP Governor map classification."
         }
@@ -326,9 +326,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senateme/maine-senate-race/senateme-26",
-          "value": "Jackson 57%; Collins 43%",
+          "value": "Jackson 58%; Collins 42%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-12T09:01:39Z",
+          "fetchedAt": "2026-10-13T08:59:32Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -337,7 +337,7 @@
           "value": "Jackson 48.1%; Collins 47.4%; Jackson +0.7; Rating: Toss Up",
           "status": "stale",
           "fetchedAt": "2026-10-09T08:57:44Z",
-          "lastAttemptedAt": "2026-10-12T09:01:39Z",
+          "lastAttemptedAt": "2026-10-13T08:59:32Z",
           "publishedAt": "2026-10-04",
           "note": "RCP map still verifies Toss Up; the race-average page was unavailable today, so the last verified average was preserved."
         }
