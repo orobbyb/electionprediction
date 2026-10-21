@@ -1,34 +1,34 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T09:00:55Z",
+  "generatedAt": "2026-10-21T09:01:29Z",
   "updatedBy": "daily-election-data-refresh",
   "refresh": {
-    "attemptedAt": "2026-10-20T09:00:55Z",
-    "notes": "Kalshi values were verified on each official race market page because both official public API hosts returned HTTP 403 in this refresh environment. RCP pages and maps returned HTTP 403 in this refresh environment, so last verified RCP values were preserved and marked stale. Sabato and Cook direct pages returned HTTP 403; no values were invented.",
+    "attemptedAt": "2026-10-21T09:01:29Z",
+    "notes": "Kalshi values were verified on each official race market page because both official public API hosts returned HTTP 403 in this refresh environment. RCP pages and maps were inaccessible in this refresh environment, so last verified RCP values were preserved and marked stale. Sabato and Cook direct pages returned HTTP 403; no values were invented.",
     "failures": [
       {
         "source": "kalshi-api",
         "status": "blocked",
         "error": "Calls to api.elections.kalshi.com and external-api.kalshi.com returned HTTP 403 in the refresh environment.",
-        "at": "2026-10-20T09:00:55Z"
+        "at": "2026-10-21T09:01:29Z"
       },
       {
         "source": "rcp",
         "status": "unavailable",
-        "error": "RCP map and race pages returned HTTP 403 in the refresh environment.",
-        "at": "2026-10-20T09:00:55Z"
+        "error": "RCP map and race pages were inaccessible in the refresh environment.",
+        "at": "2026-10-21T09:01:29Z"
       },
       {
         "source": "sabato",
         "status": "unavailable",
         "error": "Official 2026 Senate and Governor pages returned HTTP 403.",
-        "at": "2026-10-20T09:00:55Z"
+        "at": "2026-10-21T09:01:29Z"
       },
       {
         "source": "cook",
         "status": "unavailable",
         "error": "Official 2026 Senate and Governor ratings pages returned HTTP 403.",
-        "at": "2026-10-20T09:00:55Z"
+        "at": "2026-10-21T09:01:29Z"
       }
     ]
   },
@@ -38,29 +38,29 @@
       "url": "https://kalshi.com/category/elections/midterms/states",
       "apiUrl": "https://external-api.kalshi.com/trade-api/v2/markets",
       "status": "verified-page-fallback",
-      "fetchedAt": "2026-10-20T09:00:55Z",
-      "lastAttemptedAt": "2026-10-20T09:00:55Z"
+      "fetchedAt": "2026-10-21T09:01:29Z",
+      "lastAttemptedAt": "2026-10-21T09:01:29Z"
     },
     "rcp": {
       "name": "RCP polls",
       "url": "https://www.realclearpolling.com/maps/senate/2026/toss-up",
       "status": "unavailable",
       "fetchedAt": "2026-10-15T09:04:30Z",
-      "lastAttemptedAt": "2026-10-20T09:00:55Z",
-      "error": "HTTP 403"
+      "lastAttemptedAt": "2026-10-21T09:01:29Z",
+      "error": "Source inaccessible"
     },
     "sabato": {
       "name": "Sabato's Crystal Ball",
       "url": "https://centerforpolitics.org/crystalball/2026-senate/",
       "status": "unavailable",
-      "fetchedAt": "2026-10-20T09:00:55Z",
+      "fetchedAt": "2026-10-21T09:01:29Z",
       "error": "HTTP 403"
     },
     "cook": {
       "name": "Cook Political Report",
       "url": "https://www.cookpolitical.com/ratings/senate-race-ratings/565701",
       "status": "unavailable",
-      "fetchedAt": "2026-10-20T09:00:55Z",
+      "fetchedAt": "2026-10-21T09:01:29Z",
       "error": "HTTP 403"
     }
   },
@@ -71,9 +71,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senatetx/texas-senate-race/senatetx-26",
-          "value": "Talarico 62%; Paxton 38%",
+          "value": "Talarico 64%; Paxton 36%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -84,8 +84,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-11",
           "note": "RCP average dated 9/18-10/11. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -95,9 +95,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senateohs/special-senate-election-in-ohio/senateohs-26",
-          "value": "Brown 64%; Husted 36%",
+          "value": "Brown 65%; Husted 35%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -108,8 +108,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-06",
           "note": "RCP average dated 9/18-10/6. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -119,9 +119,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senatemi/michigan-senate-race/senatemi-26",
-          "value": "El-Sayed 68%; Rogers 32%",
+          "value": "El-Sayed 69%; Rogers 31%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -132,8 +132,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-10",
           "note": "RCP average dated 9/24-10/10. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -145,7 +145,7 @@
           "url": "https://kalshi.com/markets/senateia/iowa-senate-race/senateia-26",
           "value": "Turek 44%; Hinson 56%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -156,8 +156,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-12",
           "note": "RCP average dated 9/22-10/12. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -167,9 +167,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senateks/kansas-senate-race/senateks-26",
-          "value": "Hamilton 39%; Marshall 61%",
+          "value": "Hamilton 40%; Marshall 60%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -180,8 +180,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-09",
           "note": "RCP map classification; no race average captured. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -191,9 +191,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senateak/alaska-senate-race/senateak-26",
-          "value": "Democrat 76%; Republican 24%",
+          "value": "Democrat 75%; Republican 25%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi party-level race market page; API endpoints blocked."
         },
@@ -204,8 +204,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-09",
           "note": "RCP map classification; no race average captured. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -215,9 +215,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senatene/nebraska-senate-race/senatene-26",
-          "value": "Osborn 28%; Ricketts 73%; Burbank <1%",
+          "value": "Osborn 28%; Ricketts 72%; Burbank <1%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -228,8 +228,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-12",
           "note": "RCP Senate map classification changed from Toss Up to Leans GOP on 10/12. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -239,9 +239,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/govpartyoh/ohio-governor/govpartyoh-26",
-          "value": "Acton 72%; Ramaswamy 28%",
+          "value": "Acton 75%; Ramaswamy 25%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -252,8 +252,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-09",
           "note": "RCP Governor map classification. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -263,9 +263,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/govpartytx/texas-governor/govpartytx-26",
-          "value": "Hinojosa 25%; Abbott 75%",
+          "value": "Hinojosa 28%; Abbott 72%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -276,8 +276,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-09",
           "note": "RCP Governor map classification. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -287,9 +287,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/govpartynv/nevada-governor/govpartynv-26",
-          "value": "Ford 56%; Lombardo 44%",
+          "value": "Ford 57%; Lombardo 43%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -300,8 +300,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-09",
           "note": "RCP Governor map classification. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -311,9 +311,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/govpartyga/georgia-governor/govpartyga-26",
-          "value": "Bottoms 50%; Jackson 50%",
+          "value": "Bottoms 49%; Jackson 51%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -324,8 +324,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-09",
           "note": "RCP Governor map classification. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -337,7 +337,7 @@
           "url": "https://kalshi.com/markets/govpartyvt/vermont-governor/govpartyvt-26",
           "value": "Janoo 24%; Scott 76%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -348,8 +348,8 @@
           "fetchedAt": "2026-10-15T09:04:30Z",
           "publishedAt": "2026-10-09",
           "note": "RCP Governor map classification. Last verified value preserved after current refresh attempt returned HTTP 403.",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
-          "error": "HTTP 403"
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
+          "error": "Source inaccessible"
         }
       }
     },
@@ -359,9 +359,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senateme/maine-senate-race/senateme-26",
-          "value": "Jackson 63%; Collins 37%",
+          "value": "Jackson 64%; Collins 36%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-20T09:00:55Z",
+          "fetchedAt": "2026-10-21T09:01:29Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -370,10 +370,10 @@
           "value": "Jackson 48.1%; Collins 47.4%; Jackson +0.7; Rating: Toss Up",
           "status": "stale",
           "fetchedAt": "2026-10-09T08:57:44Z",
-          "lastAttemptedAt": "2026-10-20T09:00:55Z",
+          "lastAttemptedAt": "2026-10-21T09:01:29Z",
           "publishedAt": "2026-10-04",
           "note": "RCP map still verifies Toss Up; the race-average page was unavailable today, so the last verified average was preserved.",
-          "error": "HTTP 403"
+          "error": "Source inaccessible"
         }
       }
     }
