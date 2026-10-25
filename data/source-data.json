@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-24T08:57:09Z",
+  "generatedAt": "2026-10-25T08:56:10Z",
   "updatedBy": "daily-election-data-refresh",
   "refresh": {
-    "attemptedAt": "2026-10-24T08:57:09Z",
+    "attemptedAt": "2026-10-25T08:56:10Z",
     "notes": "Kalshi values were verified on official race market pages because both official public API hosts were inaccessible in this refresh environment. RCP race averages and map ratings were verified from current official pages. Sabato ratings were verified from its official rating-changes page. Cook direct ratings pages returned HTTP 403; last verified Cook ratings were preserved and marked stale, with no values invented.",
     "failures": [
       {
         "source": "kalshi-api",
         "status": "blocked",
         "error": "Calls to api.elections.kalshi.com and external-api.kalshi.com were inaccessible in the refresh environment.",
-        "at": "2026-10-24T08:57:09Z"
+        "at": "2026-10-25T08:56:10Z"
       },
       {
         "source": "cook",
         "status": "unavailable",
         "error": "Direct Cook Senate and Governor ratings pages returned HTTP 403; last verified ratings were preserved and marked stale.",
-        "at": "2026-10-24T08:57:09Z"
+        "at": "2026-10-25T08:56:10Z"
       }
     ]
   },
@@ -26,22 +26,22 @@
       "url": "https://kalshi.com/category/elections/midterms/states",
       "apiUrl": "https://external-api.kalshi.com/trade-api/v2/markets",
       "status": "verified-page-fallback",
-      "fetchedAt": "2026-10-24T08:57:09Z",
-      "lastAttemptedAt": "2026-10-24T08:57:09Z"
+      "fetchedAt": "2026-10-25T08:56:10Z",
+      "lastAttemptedAt": "2026-10-25T08:56:10Z"
     },
     "rcp": {
       "name": "RCP polls",
       "url": "https://www.realclearpolling.com/maps/senate/2026/toss-up",
       "status": "verified",
-      "fetchedAt": "2026-10-24T08:57:09Z",
-      "lastAttemptedAt": "2026-10-24T08:57:09Z"
+      "fetchedAt": "2026-10-25T08:56:10Z",
+      "lastAttemptedAt": "2026-10-25T08:56:10Z"
     },
     "sabato": {
       "name": "Sabato's Crystal Ball",
       "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
       "status": "verified",
-      "fetchedAt": "2026-10-24T08:57:09Z",
-      "lastAttemptedAt": "2026-10-24T08:57:09Z",
+      "fetchedAt": "2026-10-25T08:56:10Z",
+      "lastAttemptedAt": "2026-10-25T08:56:10Z",
       "note": "Senate ratings updated Oct. 14, 2026; governor ratings updated Oct. 22, 2026."
     },
     "cook": {
@@ -50,7 +50,7 @@
       "status": "unavailable",
       "fetchedAt": "2026-10-23T08:57:36Z",
       "error": "Direct ratings pages returned HTTP 403; last verified values preserved.",
-      "lastAttemptedAt": "2026-10-24T08:57:09Z"
+      "lastAttemptedAt": "2026-10-25T08:56:10Z"
     }
   },
   "races": {
@@ -62,23 +62,23 @@
           "url": "https://kalshi.com/markets/senatetx/texas-senate-race/senatetx-26",
           "value": "Talarico 64%; Paxton 36%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/texas/talarico-vs-paxton",
-          "value": "Talarico 48.6%; Paxton 46.8%; Talarico +1.8; Rating: Toss Up",
+          "value": "Talarico 48.4%; Paxton 46.9%; Talarico +1.5; Rating: Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
-          "publishedAt": "2026-10-19",
-          "note": "RCP average dated 10/6-10/19."
+          "fetchedAt": "2026-10-25T08:56:10Z",
+          "publishedAt": "2026-10-21",
+          "note": "RCP average dated 10/8-10/21."
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-08-26"
         },
         "cook": {
@@ -88,7 +88,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-08-20",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -99,25 +99,25 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senateohs/special-senate-election-in-ohio/senateohs-26",
-          "value": "Brown 69%; Husted 31%",
+          "value": "Brown 67%; Husted 33%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/special-election/2026/ohio/husted-vs-brown",
-          "value": "Brown 47.9%; Husted 44.8%; Brown +3.1; Rating: Toss Up",
+          "value": "Brown 48.2%; Husted 44.9%; Brown +3.3; Rating: Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-22",
-          "note": "RCP average dated 9/21-10/22."
+          "note": "RCP average dated 9/22-10/22."
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-06-11"
         },
         "cook": {
@@ -127,7 +127,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-04-13",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -140,7 +140,7 @@
           "url": "https://kalshi.com/markets/senatemi/michigan-senate-race/senatemi-26",
           "value": "El-Sayed 69%; Rogers 31%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -148,7 +148,7 @@
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/michigan/rogers-vs-el-sayed",
           "value": "El-Sayed 47.9%; Rogers 46.0%; El-Sayed +1.9; Rating: Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-22",
           "note": "RCP average dated 9/24-10/22."
         },
@@ -156,7 +156,7 @@
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Leans Democratic",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-09-22"
         },
         "cook": {
@@ -166,7 +166,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2025-02-11",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -179,7 +179,7 @@
           "url": "https://kalshi.com/markets/senateia/iowa-senate-race/senateia-26",
           "value": "Turek 42%; Hinson 58%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -187,7 +187,7 @@
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/iowa/turek-vs-hinson",
           "value": "Turek 45.5%; Hinson 46.1%; Hinson +0.6; Rating: Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-22",
           "note": "RCP average dated 9/29-10/22."
         },
@@ -195,7 +195,7 @@
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-09-22"
         },
         "cook": {
@@ -205,7 +205,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-08-20",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -218,7 +218,7 @@
           "url": "https://kalshi.com/markets/senateks/kansas-senate-race/senateks-26",
           "value": "Hamilton 40%; Marshall 60%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -226,7 +226,7 @@
           "url": "https://www.realclearpolling.com/maps/senate/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-09",
           "note": "Current RCP Senate map classification; no race average captured."
         },
@@ -234,7 +234,7 @@
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-14"
         },
         "cook": {
@@ -244,7 +244,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-10-06",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -257,7 +257,7 @@
           "url": "https://kalshi.com/markets/senateak/alaska-senate-race/senateak-26",
           "value": "Democrat 76%; Republican 24%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi party-level race market page; API endpoints blocked."
         },
@@ -265,7 +265,7 @@
           "url": "https://www.realclearpolling.com/maps/senate/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-09",
           "note": "Current RCP Senate map classification; no race average captured."
         },
@@ -273,7 +273,7 @@
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Leans Democratic",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-06"
         },
         "cook": {
@@ -283,7 +283,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-07-01",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -294,9 +294,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senatene/nebraska-senate-race/senatene-26",
-          "value": "Osborn 24%; Ricketts 77%; Burbank 0.4%",
+          "value": "Osborn 25%; Ricketts 75%; Burbank 0.3%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -304,7 +304,7 @@
           "url": "https://www.realclearpolling.com/maps/senate/2026/toss-up",
           "value": "Leans GOP",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-12",
           "note": "Current RCP Senate map classification."
         },
@@ -312,7 +312,7 @@
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Leans Republican",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-14"
         },
         "cook": {
@@ -322,7 +322,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-04-13",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -333,9 +333,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/govpartyoh/ohio-governor/govpartyoh-26",
-          "value": "Acton 80%; Ramaswamy 20%",
+          "value": "Acton 81%; Ramaswamy 19%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -343,7 +343,7 @@
           "url": "https://www.realclearpolling.com/maps/governor/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-09",
           "note": "Current RCP Governor map classification."
         },
@@ -351,7 +351,7 @@
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Leans Democratic",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-22"
         },
         "cook": {
@@ -361,7 +361,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-07-10",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -372,9 +372,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/govpartytx/texas-governor/govpartytx-26",
-          "value": "Hinojosa 29%; Abbott 71%",
+          "value": "Hinojosa 34%; Abbott 66%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -382,7 +382,7 @@
           "url": "https://www.realclearpolling.com/maps/governor/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-09",
           "note": "Current RCP Governor map classification."
         },
@@ -390,7 +390,7 @@
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Leans Republican",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-09-22"
         },
         "cook": {
@@ -400,7 +400,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-10-01",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -411,9 +411,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/govpartynv/nevada-governor/govpartynv-26",
-          "value": "Ford 66%; Lombardo 34%",
+          "value": "Ford 67%; Lombardo 33%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -421,7 +421,7 @@
           "url": "https://www.realclearpolling.com/maps/governor/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-09",
           "note": "Current RCP Governor map classification."
         },
@@ -429,7 +429,7 @@
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-09-22"
         },
         "cook": {
@@ -439,7 +439,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2025-01-23",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -452,7 +452,7 @@
           "url": "https://kalshi.com/markets/govpartyga/georgia-governor/govpartyga-26",
           "value": "Bottoms 59%; Jackson 41%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -460,7 +460,7 @@
           "url": "https://www.realclearpolling.com/maps/governor/2026/toss-up",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-09",
           "note": "Current RCP Governor map classification."
         },
@@ -468,7 +468,7 @@
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-03-19"
         },
         "cook": {
@@ -478,7 +478,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2025-01-23",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -489,9 +489,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/govpartyvt/vermont-governor/govpartyvt-26",
-          "value": "Janoo 25%; Scott 75%",
+          "value": "Janoo 26%; Scott 74%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -499,7 +499,7 @@
           "url": "https://www.realclearpolling.com/maps/governor/2026/toss-up",
           "value": "Leans GOP",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-09",
           "note": "Current RCP Governor map classification."
         },
@@ -507,7 +507,7 @@
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Likely Republican",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-09-29"
         },
         "cook": {
@@ -517,7 +517,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-10-13",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
@@ -528,9 +528,9 @@
       "sources": {
         "kalshi": {
           "url": "https://kalshi.com/markets/senateme/maine-senate-race/senateme-26",
-          "value": "Jackson 64%; Collins 36%",
+          "value": "Jackson 60%; Collins 40%",
           "status": "verified-page-fallback",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked."
         },
@@ -538,7 +538,7 @@
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/collins-vs-jackson",
           "value": "Jackson 48.8%; Collins 47.4%; Jackson +1.4; Rating: Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2026-10-20",
           "note": "RCP average dated 9/23-10/20."
         },
@@ -546,7 +546,7 @@
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "verified",
-          "fetchedAt": "2026-10-24T08:57:09Z",
+          "fetchedAt": "2026-10-25T08:56:10Z",
           "publishedAt": "2025-10-14"
         },
         "cook": {
@@ -556,7 +556,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2025-10-14",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-10-24T08:57:09Z",
+          "lastAttemptedAt": "2026-10-25T08:56:10Z",
           "error": "Direct Cook ratings page returned HTTP 403; last verified value preserved."
         }
       }
