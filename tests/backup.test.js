@@ -25,7 +25,7 @@ test('duplicate active IDs rejected; repeated prediction ID in history allowed',
  assert.doesNotThrow(()=>BoardBackup.validate({predictions:[],history:[...legacy.history,{...legacy.history[0],historyId:'another-id'}]}));
 });
 test('inline application scripts compile and use project-relative assets',async()=>{
- const html=await readFile(new URL('../public/index.html',import.meta.url),'utf8');
+ const html=await readFile(new URL('../public/legacy.html',import.meta.url),'utf8');
  for(const [,script] of html.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(script);
  assert.ok(html.includes('src="./state-paths.js"'));
  assert.ok(html.includes("new URL('./data/source-data.json',document.baseURI)"));

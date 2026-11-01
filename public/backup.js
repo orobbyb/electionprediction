@@ -13,7 +13,7 @@
         for (const key of ['id', 'state', 'type', 'winner', 'party', 'date', 'updatedAt', 'district', 'notes', 'confidence']) {
           if (typeof item[key] !== 'string') throw new Error('Invalid or missing field: ' + key);
         }
-        if (!/^[\w-]+$/.test(item.id) || !['Senate', 'Governor', 'House'].includes(item.type) ||
+        if (!/^[\w-]+$/.test(item.id) || !['Senate', 'Governor', 'House', 'Ballot'].includes(item.type) ||
             !['Democrat', 'Republican', 'Independent', 'Other'].includes(item.party) ||
             !['Low', 'Medium', 'High'].includes(item.confidence) ||
             !/^\d{4}-\d{2}-\d{2}$/.test(item.date) || !Number.isFinite(Date.parse(item.updatedAt))) {

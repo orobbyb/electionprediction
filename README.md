@@ -1,5 +1,56 @@
 # Live Midterm Prediction Board
 
+## Card dashboard
+
+The landing page is now a card dashboard, not a map. It has Senate, Governor,
+Missouri ballot questions, and Massachusetts ballot questions tabs. The
+shortlist contains 13 previously tracked races, five certified Missouri
+November measures, and nine Massachusetts statewide questions. It is not a
+complete nationwide candidate directory. The previous board remains at
+`./legacy.html` for other saved races and manual edits.
+
+Filters include Combined, Kalshi only, RCP-average polls only, and one
+individual poll. The individual-poll selector isolates one actual survey and
+its race; it does not combine it with the average. Ten selected surveys are
+recorded in `data/individual-polls.json`, as listed by RCP, with independent
+fieldwork dates, source URLs and a fetch timestamp. This is not an exhaustive
+poll database. Sample sizes and original questionnaires have not been
+collected. Existing daily source refreshes update `data/source-data.json`;
+individual-poll records require their own refresh and are not automatically
+made fresh by the main snapshot. Out-of-date records are excluded, not relabeled.
+
+`public/forecast.js` is a pure, testable prototype model. It converts a matched
+two-leading-candidate poll margin to a probability using a normal error model,
+then linearly blends it with normalized two-outcome market quotes. Base poll
+weight defaults to 60%, adjustable in the UI; polling weight decays with a
+14-day half-life and the effective weights are displayed. Error SD defaults
+to 4 percentage points for an average or 6 for one poll, widened by fieldwork
+age. These assumptions are unvalidated and NOT a historically calibrated
+forecast. Filters are analysis views; they never change personal predictions.
+See `tests/forecast.test.js` and `tests/board-ui.test.js`.
+
+Only eligible numeric sources are modeled. Stale/unavailable sources, fetches
+older than 48 hours, and polls ending more than 35 days ago are excluded.
+Missing combined inputs do not silently become market-only. Ranked-choice
+and multi-candidate contests show raw source quotes without a binary model.
+Issue forecasts remain unscored until verified question-specific polling and
+matching market records exist. Sabato and Cook ratings are context only.
+Liquidity and spread are not present in the existing Kalshi page snapshots;
+no liquidity-based adjustment is claimed.
+
+The state filter selects the election's location, NOT bettors' locations.
+Kalshi's public trade schema does not contain trader identity or residence:
+https://docs.kalshi.com/api-reference/market/get-trades. A geography-filtered
+market estimate cannot be derived from this public feed. Public market-data
+requests need no API key: https://docs.kalshi.com/getting_started/quick_start_market_data.
+No private keys belong in this public repository or frontend.
+
+The existing browser-storage key is unchanged. Old selections and history
+are retained, including races outside the new shortlist. New ballot picks
+use type `Ballot` and a question identifier in `district`. Backups support
+both versions. Print/share reports contain all personal decisions sorted by
+state, without model probabilities, confidence or notes.
+
 ## Run locally
 
 Requires Node.js 20 or newer.
@@ -71,6 +122,6 @@ a verified record display an unavailable message, not a fabricated value.
 
 Candidate lists in `public/index.html` were updated on October 7, 2026 from The Ballot Brief's 2026 candidate index, which states that its fields follow certified candidate lists: https://theballotbrief.com/candidates. The app retains a source URL and access date in `candidateSource`. Because some state pages report additional minor-party candidates beyond the names shown in their statewide race card, review the linked state page before treating the list as exhaustive.
 
-## Map interface
+## Legacy map interface
 
 The map/list interaction is modeled on the familiar workflow used by election forecast sites: a map-first forecast board, a fast candidate list, summary totals, and print/share controls. The application does not copy 270toWin source code or branding. State geometry is vendored from the public-domain `robflaherty/us-map-raphael` asset, whose original SVG source is credited in `public/state-paths.js`.

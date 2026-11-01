@@ -23,7 +23,7 @@ const path=require('node:path');
  try{
   const page=await browser.newPage(),errors=[],requests=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
-  await page.goto('http://127.0.0.1:'+server.address().port+'/electionprediction/');
+  await page.goto('http://127.0.0.1:'+server.address().port+'/electionprediction/legacy.html');
   await page.waitForFunction(()=>document.getElementById('summarySnapshot').textContent!=='Verified sources');
   assert.equal(await page.locator('#usMap path').count(),50);
   await page.click('#listViewBtn');

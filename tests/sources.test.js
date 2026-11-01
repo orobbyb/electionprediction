@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
 
-const html=await readFile(new URL('../public/index.html',import.meta.url),'utf8');
+const html=await readFile(new URL('../public/legacy.html',import.meta.url),'utf8');
 const script=html.slice(html.indexOf('let sourceSnapshot='),html.indexOf('function reportRows()'));
 function setup(fetcher){
  const elements={state:{value:'Texas'},type:{value:'Senate'},summarySnapshot:{textContent:''}};
