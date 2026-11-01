@@ -32,11 +32,21 @@ const server=createServer(async(req,res)=>{
   await page.locator('#mapView').click();
   assert.equal(await page.locator('.map-state').count(),50);
   assert.equal(await page.locator('.map-state.tracked').count(),8);
+  assert.equal(await page.locator('#stateSvg').getAttribute('data-geometry'),'electit');
+  assert.equal(await page.locator('#stateSvg').getAttribute('viewBox'),'-2396 -3206 4694 3084');
   const misplaced=await page.locator('#stateSvg').evaluate(svg=>[...svg.querySelectorAll('.map-state-label')].filter(label=>{
    const path=svg.querySelector(`[data-abbr="${label.textContent.toLowerCase()}"]`);
    return !path.isPointInFill(new DOMPoint(Number(label.getAttribute('x')),Number(label.getAttribute('y'))));
   }).map(label=>label.textContent));
   assert.deepEqual(misplaced,[],'All state labels must lie inside their state path');
+  await page.locator('#mapSearch').fill('Maine');
+  await page.locator('[data-search-race="maine|senate"]').click();
+  assert.match(await page.locator('#raceDetailTitle').textContent(),/^Maine/);
+  await page.locator('#closeRaceDetail').click();
+  await page.locator('[data-spectrum-race="texas|senate"]').click();
+  assert.match(await page.locator('#raceDetailTitle').textContent(),/^Texas/);
+  await page.locator('[data-map-race="texas|senate"]').hover();
+  assert.equal(await page.locator('#mapTooltip').isVisible(),true);
   await page.locator('[data-map-race="texas|senate"]').press('Enter');
   assert.match(await page.locator('#scenarioTitle').textContent(),/^Texas/);
   assert.match(await page.locator('[data-race="texas|senate"]').getAttribute('class'),/focused/);
@@ -55,15 +65,25 @@ const server=createServer(async(req,res)=>{
   await page.locator('[data-scenario="-2"]').click();
   assert.equal(await page.locator('[data-race="texas|senate"] .probability').first().textContent(),market);
   await page.locator('#sourceMode').selectOption('combined');await page.locator('#resetAssumptions').click();
+  await page.locator('#closeRaceDetail').click();
   await page.screenshot({path:'test-results/explorer-desktop.png',fullPage:true});
+  await page.locator('#mapPanel').screenshot({path:'test-results/electit-map-desktop.png'});
   for(const width of [375,320]){
    await page.setViewportSize({width,height:900});
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`No overflow at ${width}px`);
   }
   await page.screenshot({path:'test-results/explorer-mobile.png',fullPage:true});
+  await page.locator('#mapPanel').screenshot({path:'test-results/electit-map-mobile.png'});
+  await page.setViewportSize({width:1440,height:1100});
+  await page.locator('[data-map-race="texas|senate"]').click({modifiers:['Shift']});
+  let updated=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  assert.equal(updated.predictions[0].winner,'James Talarico');assert.equal(updated.history.length,1);assert.equal(updated.predictions[0].notes,'QA only');
+  await page.locator('#raceDetail [data-pick="texas|senate"][data-choice="1"]').click();
+  updated=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);assert.equal(updated.predictions[0].winner,'Ken Paxton');assert.equal(updated.history.length,2);
   await page.locator('#tab-ma').click();assert.equal(await page.locator('#mapPanel').isVisible(),false);assert.equal(await page.locator('#explorerControls').isVisible(),false);
   assert.equal(await page.locator('.race-card').count(),9);
-  assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),before);
+  assert.equal(await page.locator('#raceDetail').isVisible(),false);assert.equal(await page.locator('#assumptionsPanel').isVisible(),false);
+  assert.equal((await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key)).history.length,2);
   assert.deepEqual(errors,[]);console.log('PASS: map geometry, label positions, linked cards, scenario effects, pick preservation, tabs, desktop/mobile layout.');
  }finally{await browser.close();server.close();}
 })().catch(error=>{console.error(error);server.close();process.exitCode=1;});

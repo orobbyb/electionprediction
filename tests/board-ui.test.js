@@ -26,8 +26,8 @@ async function setup(seed={predictions:[],history:[]},hash=''){
  const buttons={};
  function query(selector){
   if(selector==='[data-tab]')return tabs;
-  if(['[data-pick]','[data-clear]','[data-map-race]','[data-map-shortcut]','[data-focus-race]','[data-scenario]'].includes(selector)){
-   const source=selector==='[data-clear]'?elements.savedCalls.innerHTML:selector==='[data-map-race]'?elements.mapCanvas.innerHTML:selector==='[data-map-shortcut]'?elements.mapStateButtons.innerHTML:selector==='[data-scenario]'?elements.scenarioComparison.innerHTML:elements.cards.innerHTML;
+  if(['[data-pick]','[data-clear]','[data-map-race]','[data-map-shortcut]','[data-focus-race]','[data-scenario]','[data-spectrum-race]','[data-search-race]'].includes(selector)){
+   const source=selector==='[data-clear]'?elements.savedCalls.innerHTML:selector==='[data-map-race]'?elements.mapCanvas.innerHTML:selector==='[data-map-shortcut]'?elements.mapStateButtons.innerHTML:selector==='[data-scenario]'?elements.scenarioComparison.innerHTML:selector==='[data-spectrum-race]'?elements.raceSpectrum.innerHTML:selector==='[data-search-race]'?elements.mapSearchResults.innerHTML:elements.cards.innerHTML;
    return [...source.matchAll(/<(?:button|path)\b([^>]*)>/g)].filter(([,attrs])=>attrs.includes(selector.slice(1,-1)+'=')).map(([,attrs])=>{
     const b=new Element();for(const [,key,val] of attrs.matchAll(/data-([\w-]+)="([^"]*)"/g))b.dataset[key.replace(/-([a-z])/g,(_,c)=>c.toUpperCase())]=val;
     const attr=selector.slice(6,-1).replace(/-([a-z])/g,(_,c)=>c.toUpperCase());
@@ -44,7 +44,7 @@ async function setup(seed={predictions:[],history:[]},hash=''){
   fetch:async url=>{requests.push(String(url));return {ok:true,json:async()=>String(url).includes('individual-polls')?polls:snapshot};},
   confirm:()=>true,navigator:{clipboard:{writeText:async text=>{context.copied=text}}},window:{print:()=>{context.printed=true},location:{hash,href:'https://example.com/electionprediction/'+hash},history:{replaceState:(a,b,url)=>{context.urlHash=url}}}
  });
- for(const file of ['backup.js','forecast.js','board-data.js','state-paths.js','state-map.js','board.js'])vm.runInContext(await readFile(new URL('public/'+file,base),'utf8'),context);
+ for(const file of ['backup.js','forecast.js','board-data.js','state-paths.js','electit-map-data.js','state-map.js','board.js'])vm.runInContext(await readFile(new URL('public/'+file,base),'utf8'),context);
  await new Promise(resolve=>setImmediate(resolve));
  return {context,elements,storage,requests,buttons};
 }
@@ -104,4 +104,22 @@ test('shared scenario restores selected race, single poll and map settings after
  assert.equal(t.elements.swing.value,'-2');assert.equal(t.elements.spread.value,'1.5');
  assert.equal(t.elements.mapPanel.hidden,false);assert.equal((t.elements.cards.innerHTML.match(/class="race-card/g)||[]).length,1);
  assert.ok(t.elements.cards.innerHTML.includes('Selected poll support: 48% / 49%'));
+});
+test('ElectIt geometry is the default; search and spectrum open linked race details without saving a pick',async()=>{
+ const t=await setup(seed),before=t.storage.get('my-midterm-prediction-board-v1');
+ assert.equal(t.elements.mapPanel.hidden,false);assert.ok(t.elements.mapCanvas.innerHTML.includes('data-geometry="electit"'));
+ assert.ok(t.elements.mapCanvas.innerHTML.includes('viewBox="-2396 -3206 4694 3084"'));
+ t.elements.mapSearch.value='Maine';t.elements.mapSearch.oninput();
+ t.buttons['data-search-race|maine|senate'].click();
+ assert.equal(t.elements.raceDetail.hidden,false);assert.ok(t.elements.raceDetailTitle.textContent.startsWith('Maine'));
+ assert.equal(t.elements.mapSearchResults.hidden,true);
+ t.buttons['data-spectrum-race|texas|senate'].click();assert.ok(t.elements.raceDetailTitle.textContent.startsWith('Texas'));
+ t.elements.closeRaceDetail.click();assert.equal(t.elements.raceDetail.hidden,true);
+ assert.equal(t.storage.get('my-midterm-prediction-board-v1'),before);
+});
+test('shift-click is an explicit personal call and appends history without losing previous records',async()=>{
+ const t=await setup(seed);t.buttons['data-map-race|texas|senate'].onclick({shiftKey:true});
+ const data=JSON.parse(t.storage.get('my-midterm-prediction-board-v1'));
+ assert.equal(data.predictions[0].winner,'James Talarico');assert.equal(data.predictions[0].notes,'keep notes');
+ assert.equal(data.history.length,2);assert.deepEqual(data.history[0],seed.history[0]);
 });

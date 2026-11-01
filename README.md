@@ -2,7 +2,7 @@
 
 ## Card dashboard
 
-The landing page is a card dashboard with an optional linked map. It has Senate, Governor,
+The landing page is a map-first explorer with linked cards. It has Senate, Governor,
 Missouri ballot questions, and Massachusetts ballot questions tabs. The
 shortlist contains 13 previously tracked races, five certified Missouri
 November measures, and nine Massachusetts statewide questions. It is not a
@@ -31,10 +31,14 @@ See `tests/forecast.test.js` and `tests/board-ui.test.js`.
 
 ### Linked map and sensitivity explorer
 
-Senate and Governor tabs offer Cards or Map + cards. The map uses the existing
-public-domain state geometry, with labels inside the same SVG coordinate system.
-Select a tracked state by mouse, keyboard, or the state shortcut buttons to focus
-its card. Grey states are outside the current filtered shortlist, not a claim
+Senate and Governor tabs offer Cards or Map + cards (the default). The new map
+uses the 50 state outlines and original viewBox from the user-supplied ElectIt.html,
+isolated in `public/electit-map-data.js`, with labels inside the same SVG coordinate system.
+Select a tracked state by mouse, keyboard, search, the ordered race strip, or state
+shortcut buttons to open its details and focus its card. Hover gives source odds
+and the saved call. Shift/Alt-click cycles candidates and explicitly saves a call;
+unmodified clicks never save anything. Candidate buttons remain one-click picks.
+Grey states are outside the current filtered shortlist, not a claim
 that no election occurs there. Hatching means no eligible model estimate.
 Model coloring shows the favored candidate's party and probability; My picks
 coloring shows only saved selections, never a model-generated call.
@@ -45,8 +49,15 @@ or saved predictions. Baseline and +/-2-point comparisons use the selected race
 and source mode. Copy scenario link shares only analysis settings; it never
 embeds personal selections or history. The recipient sees their own local picks.
 
-ElectIt's inspectable-assumptions workflow inspired this explorer, not copied
-source code or branding. Its live JavaScript was unavailable for inspection.
+The user-supplied saved ElectIt page made its inline geometry and interaction
+code available for inspection. The state geometry is adapted with source and
+author credit. The renderer, search, source integration, counts, details and
+notebook layout are independently implemented. No complete ElectIt frontend,
+analytics, embedded fonts, model simulations or forecast values are imported.
+No open-source license was included in the upload; none is asserted. This app
+is independent and must not be represented as ElectIt or Harvard's forecast.
+The warm panels, outlined controls, sidebar and map interactions follow the
+reference while preserving the notebook's four tabs and personal storage.
 This is not a reimplementation of LogisTiCC, a joint correlated simulation,
 a validated forecast, or a chamber-control model. Backtesting and calibration
 remain future work. The displayed polling-margin interval is assumption-based.

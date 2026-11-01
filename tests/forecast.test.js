@@ -44,7 +44,7 @@ test('all certified statewide measure cards are distinct and support recoverable
  assert.deepEqual(BoardBackup.parse(BoardBackup.serialize(data)),data);
 });
 test('production scripts compile; all new map assets use project-relative paths',async()=>{
- for(const file of ['board.js','forecast.js','board-data.js','backup.js','state-map.js'])new vm.Script(await readFile(new URL('../public/'+file,import.meta.url),'utf8'));
+ for(const file of ['board.js','forecast.js','board-data.js','backup.js','state-map.js','electit-map-data.js'])new vm.Script(await readFile(new URL('../public/'+file,import.meta.url),'utf8'));
  const html=await readFile(new URL('../public/index.html',import.meta.url),'utf8');
  assert.equal((html.match(/role="tab"/g)||[]).length,4);assert.ok(html.includes('./state-map.js'));assert.ok(html.includes('./state-paths.js'));assert.ok(!html.includes('src="/'));
  const polls=JSON.parse(await readFile(new URL('../data/individual-polls.json',import.meta.url),'utf8'));

@@ -3,21 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>My Election Notebook — Maps &amp; Cards</title>
+<title>Election Notebook — Explore your forecast</title>
 <link rel="stylesheet" href="./board.css">
+<link rel="stylesheet" href="./electit-board.css">
 <script defer src="./backup.js"></script>
 <script defer src="./forecast.js"></script>
 <script defer src="./board-data.js"></script>
 <script defer src="./state-paths.js"></script>
+<script defer src="./electit-map-data.js"></script>
 <script defer src="./state-map.js"></script>
 <script defer src="./board.js"></script>
 </head>
 <body>
 <main class="app">
 <header class="hero">
- <div><p class="eyebrow">MY ELECTION NOTEBOOK · 2026</p><h1>Races &amp; ballot questions</h1><p>Source estimates inform the board. Only you make your predictions.</p></div>
+ <div><p class="eyebrow">ELECTION NOTEBOOK <span>· YOUR 2026 BOARD</span></p></div>
  <div class="actions"><button id="exportBtn">Export board</button><label class="button" for="importFile">Import board<input id="importFile" type="file" accept=".json,application/json" hidden></label><button id="undoBtn">Undo last import</button><button id="printBtn">Print / Save PDF</button><button id="shareBtn">Share my calls</button></div>
 </header>
+<section class="introduction"><div><p class="eyebrow">THE MIDTERMS, THROUGH YOUR EYES</p><h1>Explore the odds.<br>Make your own calls.</h1><p>Polls, markets, and the assumptions in between. A personal election notebook, with every source in view.</p></div><aside class="intro-note"><strong>Your calls stay yours.</strong><p>Explore a model without changing your predictions. Nothing is saved as your call until you pick a candidate or cycle a state with Shift + click.</p><p class="mini">An independent project using ElectIt’s supplied state geometry. Not affiliated with ElectIt or Harvard; forecasts below are our experimental blend.</p></aside></section>
 <p id="status" role="status" aria-live="polite">Loading verified source snapshots…</p>
 <noscript><p>This board needs JavaScript. Enable it to use the cards. Your saved predictions have not been changed.</p></noscript>
 <nav class="tabs" role="tablist" aria-label="Election categories">
@@ -26,6 +29,10 @@
  <button id="tab-mo" data-tab="mo" role="tab" aria-selected="false" aria-controls="racePanel">Missouri ballot Qs</button>
  <button id="tab-ma" data-tab="ma" role="tab" aria-selected="false" aria-controls="racePanel">Massachusetts ballot Qs</button>
 </nav>
+<section class="forecast-head" aria-label="Tracked race overview"><div><p class="eyebrow">YOUR CURRENT VIEW</p><h2 id="forecastHeadline">Explore the tracked Senate races</h2><p id="forecastSummary" class="mini"></p></div><div class="forecast-counts" id="forecastCounts"></div><div id="forecastMeter" class="forecast-meter" aria-label="Summary of this shortlist"></div><p class="mini">Shortlist only. Counts are not a projection of chamber control.</p></section>
+<div class="workspace">
+<aside class="analysis-rail" aria-label="Build your forecast">
+<div class="rail-heading"><p class="eyebrow">YOUR SETTINGS</p><h2>Build your forecast</h2><p class="mini">Adjust a source or assumption. Watch the map respond.</p></div>
 <section class="controls" aria-label="Card filters">
  <label>Source view<select id="sourceMode"><option value="combined">Combined model</option><option value="market">Kalshi only</option><option value="polls">Polls only · RCP average</option><option value="single">One individual poll</option></select></label>
  <label id="pollControl" hidden>Individual poll<select id="pollChoice"></select></label>
@@ -33,12 +40,7 @@
  <label>Sort<select id="sortOrder"><option value="close">Closest estimates first</option><option value="state">State / question order</option></select></label>
  <label id="weightControl">Base poll weight: <output id="weightLabel">60%</output><input id="weight" type="range" min="0" max="100" value="60" step="5"></label>
 </section>
-<section class="explorer-controls" id="explorerControls" aria-label="Map display">
- <div class="segmented" role="group" aria-label="Race view"><button id="cardsView" aria-pressed="true">Cards</button><button id="mapView" aria-pressed="false">Map + cards</button></div>
- <label id="mapLayerControl" hidden>Map colors<select id="mapLayer"><option value="model">Model estimates</option><option value="picks">My picks only</option></select></label>
- <button id="scenarioLink">Copy scenario link</button>
-</section>
-<details class="assumptions" id="assumptionsPanel" open><summary>Explore assumptions · sensitivity analysis, not a validated forecast</summary>
+<details class="assumptions" id="assumptionsPanel" open><summary>Explore assumptions</summary>
  <div class="controls">
   <label>Democratic margin adjustment: <output id="swingLabel">0 pp</output><input id="swing" type="range" min="-6" max="6" step="0.5" value="0"></label>
   <label>Polling uncertainty<select id="spread"><option value="0.75">0.75× base error</option><option value="1" selected>1× base error</option><option value="1.5">1.5× base error</option><option value="2">2× base error</option></select></label>
@@ -47,6 +49,7 @@
  <p class="mini">Positive margin adjustments favor Democrats; negative adjustments favor Republicans. The same adjustment applies to every modeled partisan race's polling input. It does not change Kalshi quotes or ballot questions, and it never changes your picks. This is a shared what-if assumption, not a fitted correlated-election simulation.</p>
  <p class="mini">No chamber-control odds are shown: this shortlist is incomplete, and joint probabilities would require a separately validated model. Candidate effects and historical back-testing are not implemented.</p>
 </details>
+<button id="scenarioLink" class="share-scenario">Copy scenario link</button>
 <p class="scope">Race state filters the location of the election, not the residence of traders. Kalshi public data has no trader-location field.</p>
 <details class="method"><summary>How the prototype works · assumptions and limitations</summary>
  <p>This is an experimental comparison tool, not a calibrated election forecast. Poll support is not a win probability. We convert the leading-candidate margin using a normal error model: base standard deviation 4 percentage points for an average, 6 for a single poll, widened with fieldwork age. These assumptions are unvalidated. Poll weight decays with a 14-day half-life; the two effective weights are normalized before blending. Market probabilities are normalized only for matched two-outcome quotes summing to 98–102%.</p>
@@ -54,14 +57,20 @@
  <p>Polls and markets overlap in information; blending does not treat them as independent evidence. Kalshi page snapshots do not include spread or liquidity, so no liquidity adjustment is claimed. Multi-candidate and ranked-choice contests show raw quotes, not a fabricated joint forecast. Candidate cards show the tracked field, not an exhaustive certified ballot. Individual polls are a small, separately dated selection listed by RCP, not a new poll average.</p>
  <p>Your selections, history, exports, and print report are independent of all model settings. Old saved races remain in “All my saved calls” and can be edited in the <a href="./legacy.html">legacy board</a>.</p>
 </details>
+</aside>
 <section id="racePanel" role="tabpanel" aria-labelledby="tab-senate"><p id="coverage"></p>
- <section id="mapPanel" class="map-panel" hidden aria-label="Linked state map"><div class="section-heading"><h2 id="mapTitle">Senate · model estimates</h2><span class="mini">Click or focus a tracked state</span></div><div id="mapCanvas"></div><div id="mapLegend" class="map-legend"></div><div id="mapStateButtons" class="state-callouts" aria-label="Tracked state shortcuts, including small states"></div><p id="mapSelection" role="status" aria-live="polite"></p></section>
+ <section class="explorer-controls" id="explorerControls" aria-label="Map display"><div class="segmented" role="group" aria-label="Race view"><button id="mapView" aria-pressed="true">Map + cards</button><button id="cardsView" aria-pressed="false">Cards</button></div><label id="mapLayerControl">Map colors<select id="mapLayer"><option value="model">Model estimates</option><option value="picks">My picks only</option></select></label></section>
+ <section id="mapPanel" class="map-panel" aria-label="Linked state map"><div class="section-heading"><h2 id="mapTitle">Senate · model estimates</h2><span class="mini">Click for details · Shift + click to cycle your call</span></div><div class="map-search"><label for="mapSearch">Find a state or candidate</label><input id="mapSearch" type="search" placeholder="Try Maine or a candidate…" aria-controls="mapSearchResults" autocomplete="off"><div id="mapSearchResults" class="search-results" hidden></div></div><div id="mapCanvas"></div><div id="mapLegend" class="map-legend"></div><div id="mapStateButtons" class="state-callouts" aria-label="Tracked state shortcuts, including small states"></div><p id="mapSelection" role="status" aria-live="polite"></p><p class="geometry-credit">State map adapted from the supplied <a href="https://gking.harvard.edu/electit/" target="_blank" rel="noopener">ElectIt</a> page · Ebanks, Katz &amp; King</p></section>
+ <section id="raceDetail" class="race-detail" aria-label="Selected race details" hidden><div class="section-heading"><h2 id="raceDetailTitle">Selected race</h2><button id="closeRaceDetail" aria-label="Close race details">Close ×</button></div><div id="raceDetailBody"></div></section>
+ <section id="competitivePanel" class="competitive-panel" aria-label="Tracked race spectrum"><h2>The competitive races</h2><p class="mini">One tile per tracked contest, ordered from Democratic to Republican win chance. Unscored races stay separate.</p><div id="raceSpectrum" class="race-spectrum"></div></section>
  <section id="scenarioPanel" class="scenario-panel" aria-label="Scenario comparison"><h2 id="scenarioTitle">Race sensitivity</h2><p id="scenarioSubtitle" class="mini"></p><div id="scenarioComparison" class="scenario-comparison"></div></section>
  <div id="cards" class="cards"></div></section>
+</div>
 <section class="saved"><div class="section-heading"><h2>All my saved calls</h2><span id="savedCount"></span></div><div id="savedCalls"></div></section>
 <details class="history"><summary id="historySummary">My prediction history</summary><div id="historyList"></div></details>
 <footer>Saved in this browser only. Back up before switching between Render and GitHub Pages. Your selections are never committed to GitHub. <a href="./legacy.html">Other races / legacy board</a></footer>
 </main>
+<div id="mapTooltip" class="map-tooltip" role="tooltip" hidden></div>
 <section id="printReport" aria-label="My final decisions"></section>
 </body>
 </html>

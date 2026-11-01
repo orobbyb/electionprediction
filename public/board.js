@@ -8,7 +8,7 @@
  const date=value=>value&&Number.isFinite(Date.parse(value))?new Date(value).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'}):'Not recorded';
  const safeLink=url=>/^https:\/\//.test(url||'')?url:'#';
  let data={predictions:[],history:[]},storageOK=true,snapshot={races:{}},pollData={polls:[]},tab='senate',loadErrors=[];
- let viewMode='cards',selectedRace=null;
+ let viewMode='map',selectedRace=null,detailOpen=false;
  const initialScenario=window.location?.hash||'';
  try{const saved=localStorage.getItem(KEY);if(saved)data=BoardBackup.parse(saved);}catch(error){storageOK=false;$('status').textContent='Saved board could not be read: '+error.message+'. Export the original data before replacing it.';}
  const races=BoardData.races;
@@ -21,12 +21,62 @@
  }
  function focusRace(id,scroll=false){
   if(!races.some(r=>r.id===id&&r.tab===tab))return;
-  selectedRace=id;render();
-  if(scroll)document.querySelector?.('[data-race="'+id+'"]')?.scrollIntoView?.({behavior:'smooth',block:'center'});
+  selectedRace=id;detailOpen=true;render();
+  if(scroll)document.querySelector?.('#raceDetail')?.scrollIntoView?.({behavior:'smooth',block:'nearest'});
+ }
+ function cycleRace(id){
+  const race=races.find(r=>r.id===id);if(!race)return;
+  selectedRace=id;detailOpen=true;
+  const index=race.candidates.findIndex(c=>c.name===currentPick(race)?.winner);
+  makePick(id,(index+1)%race.candidates.length);
+ }
+ function bindPickButtons(){document.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>makePick(b.dataset.pick,Number(b.dataset.choice)));}
+ function showMapTooltip(event,entry){
+  const m=entry.model,tip=$('mapTooltip');
+  tip.innerHTML='<strong>'+esc(entry.state)+'</strong><br>'+entry.candidates.map((c,i)=>esc(c.name)+(m.probabilities?' · '+Math.round(m.probabilities[i]*100)+'%':'')).join('<br>')+'<br><span>'+esc(m.probabilities?m.label:m.reason)+'</span><br><span>'+(entry.pick?'Your call: '+esc(entry.pick.winner):'No personal call')+'</span>';
+  tip.hidden=false;
+  tip.style.left=Math.max(8,Math.min((event.clientX||16)+16,(window.innerWidth||1000)-310))+'px';
+  const height=tip.getBoundingClientRect?.().height||220;
+  tip.style.top=Math.max(8,Math.min((event.clientY||16)+16,(window.innerHeight||900)-height-8))+'px';
+ }
+ function renderOverview(visible){
+  const own=$('mapLayer').value==='picks',totals={dem:0,rep:0,other:0,missing:0};
+  for(const race of visible){
+   const m=model(race),pick=currentPick(race),winner=own?pick:m.probabilities?race.candidates[m.probabilities.indexOf(Math.max(...m.probabilities))]:null;
+   if(!winner||(!own&&m.probabilities?.[0]===.5)){totals.missing++;continue;}
+   totals[partyClass(winner.party)==='dem'?'dem':partyClass(winner.party)==='rep'?'rep':'other']++;
+  }
+  $('forecastHeadline').textContent=tab==='mo'?'Missouri ballot questions':tab==='ma'?'Massachusetts ballot questions':(own?'Your calls':'The experimental outlook')+' · '+(tab==='senate'?'U.S. Senate':'Governor');
+  $('forecastSummary').textContent=(own?'Saved calls only.':'Model favorites, not expected seat totals.')+' '+visible.length+' tracked contests in this filtered view.';
+  $('forecastCounts').innerHTML=[['dem','Democratic'],['rep','Republican'],['other','Other / issue'],['missing',own?'No call':'Unscored / even']].map(([k,label])=>'<span class="count '+k+'"><strong>'+totals[k]+'</strong>'+label+'</span>').join('');
+  $('forecastMeter').innerHTML=Object.entries(totals).filter(([,n])=>n).map(([k,n])=>'<span class="'+k+'" style="flex:'+n+'" aria-label="'+k+': '+n+'"></span>').join('');
+ }
+ function renderDetail(visible){
+  const race=visible.find(r=>r.id===selectedRace),allowed=tab==='senate'||tab==='governor';
+  $('raceDetail').hidden=!detailOpen||!race||!allowed;
+  if(!detailOpen||!race||!allowed)return;
+  const m=model(race),pick=currentPick(race),records=snapshot.races?.[race.id]?.sources||{};
+  $('raceDetailTitle').textContent=race.state+' · '+race.office;
+  $('raceDetailBody').innerHTML='<p class="mini">'+esc(m.probabilities?m.label:m.reason)+'</p><div class="detail-candidates">'+race.candidates.map((c,i)=>'<div><span class="party-dot '+partyClass(c.party)+'"></span><strong>'+esc(c.name)+'</strong><span class="mini">'+esc(c.party)+'</span><b>'+(m.probabilities?Math.round(m.probabilities[i]*100)+'%':'Not scored')+'</b><button class="pick '+partyClass(c.party)+'" data-pick="'+esc(race.id)+'" data-choice="'+i+'" aria-pressed="'+(pick?.winner===c.name)+'" '+(!storageOK?'disabled':'')+'>'+(pick?.winner===c.name?'My call: ':'Pick: ')+esc(c.name)+'</button></div>').join('')+'</div><p class="mini">Your call: '+esc(pick?.winner||'Not selected')+'. Changing model settings does not change this call.</p><details class="source-details"><summary>Source data &amp; dates</summary>'+sourceDetail('Kalshi',records.kalshi)+sourceDetail('RCP',records.rcp)+sourceDetail('Sabato (context only)',records.sabato)+sourceDetail('Cook (context only)',records.cook)+'</details>';
+  bindPickButtons();
+ }
+ function renderSpectrum(visible){
+  $('competitivePanel').hidden=tab==='mo'||tab==='ma';
+  const ordered=visible.slice().sort((a,b)=>{
+   const probability=r=>{const p=model(r).probabilities,i=r.candidates.findIndex(c=>c.party==='Democrat');return p&&i>=0?p[i]:-1;};
+   return probability(b)-probability(a);
+  });
+  $('raceSpectrum').innerHTML=ordered.map(r=>{
+   const m=model(r),i=m.probabilities?(m.probabilities[0]>=.5?0:1):-1,abbr=StateMap.states.find(s=>s[1]===r.state)?.[0].toUpperCase();
+   const color=i<0?'#e1e5eb':StateMap.probabilityColor(m.probabilities[i],r.candidates[i].party);
+   return '<button data-spectrum-race="'+esc(r.id)+'" aria-pressed="'+(selectedRace===r.id)+'" style="--tile:'+color+'"><b>'+abbr+'</b><span>'+(i<0?'—':Math.round(m.probabilities[i]*100)+'% '+(r.candidates[i].party==='Democrat'?'D':'R'))+'</span></button>';
+  }).join('');
+  document.querySelectorAll('[data-spectrum-race]').forEach(b=>b.onclick=()=>focusRace(b.dataset.spectrumRace));
  }
  function renderMap(visible){
   const allowed=tab==='senate'||tab==='governor';
   $('explorerControls').hidden=!allowed;$('mapPanel').hidden=!allowed||viewMode!=='map';
+  $('assumptionsPanel').hidden=!allowed;
   $('mapLayerControl').hidden=!allowed||viewMode!=='map';
   $('cardsView').setAttribute('aria-pressed',String(viewMode==='cards'));$('mapView').setAttribute('aria-pressed',String(viewMode==='map'));
   if(!allowed||viewMode!=='map')return;
@@ -36,14 +86,19 @@
   $('mapCanvas').innerHTML=StateMap.markup(statePaths,entries,layer,selectedRace);
   StateMap.annotate(document.querySelector?.('#stateSvg'));
   document.querySelectorAll('[data-map-race]').forEach(path=>{
-   path.onclick=()=>focusRace(path.dataset.mapRace,true);
-   path.onkeydown=event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();focusRace(path.dataset.mapRace,true);}};
+   path.onclick=event=>{if(event?.shiftKey||event?.altKey)cycleRace(path.dataset.mapRace);else focusRace(path.dataset.mapRace);};
+   path.onkeydown=event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();if(event.shiftKey||event.altKey)cycleRace(path.dataset.mapRace);else focusRace(path.dataset.mapRace);}};
+   const entry=entries.find(r=>r.id===path.dataset.mapRace);
+   path.onpointermove=event=>{if(event.pointerType==='mouse')showMapTooltip(event,entry);};
+   path.onpointerleave=()=>{$('mapTooltip').hidden=true;};
+   path.onblur=()=>{$('mapTooltip').hidden=true;};
   });
   $('mapStateButtons').innerHTML=entries.slice().sort((a,b)=>a.state.localeCompare(b.state)).map(r=>'<button data-map-shortcut="'+esc(r.id)+'" aria-pressed="'+(r.id===selectedRace)+'">'+esc(r.state)+'</button>').join('');
   document.querySelectorAll('[data-map-shortcut]').forEach(b=>b.onclick=()=>focusRace(b.dataset.mapShortcut,true));
   const swatch=(fill,text)=>'<span><i style="background:'+fill+'"></i>'+text+'</span>';
   $('mapLegend').innerHTML=layer==='picks'?swatch('#3157d5','Your Democratic pick')+swatch('#bc414b','Your Republican pick')+swatch('#7853a7','Independent / other')+swatch('#fff','No call'):swatch(StateMap.probabilityColor(.95,'Democrat'),'D 95%')+swatch(StateMap.probabilityColor(.7,'Democrat'),'D 70%')+swatch(StateMap.probabilityColor(.5,'Democrat'),'Even 50%')+swatch(StateMap.probabilityColor(.7,'Republican'),'R 70%')+swatch(StateMap.probabilityColor(.95,'Republican'),'R 95%')+'<span><i style="background:repeating-linear-gradient(135deg,#f4f6fa 0 3px,#a7b2c4 3px 4px)"></i>No supported estimate</span>';
   $('mapLegend').innerHTML+=swatch('#e1e5eb','Outside this view / shortlist');
+  if(layer==='model')$('mapLegend').innerHTML='<div class="probability-ramp"><div></div><p><span>Republican win</span><span>Even</span><span>Democratic win</span></p></div>'+$('mapLegend').innerHTML;
   const selected=entries.find(r=>r.id===selectedRace);
   $('mapSelection').textContent=selected?selected.state+' selected · '+(layer==='picks'?(selected.pick?'Your call: '+selected.pick.winner:'You have not made a call.'):'Source: '+$('sourceMode').selectedOptions?.[0]?.textContent+' · '+model(selected).label):'Select a state to highlight its card.';
  }
@@ -124,9 +179,10 @@
   if(!visible.some(r=>r.id===selectedRace))selectedRace=visible[0]?.id||null;
   $('coverage').textContent=`${visible.length} cards · ${tab==='mo'||tab==='ma'?'Certified statewide measures; no issue polling or markets collected yet.':'Existing tracked competitive-race shortlist; not all U.S. races.'} Source snapshot: ${date(snapshot.generatedAt)}. Individual polls: ${date(pollData.fetchedAt)}.`;
   $('cards').innerHTML=visible.length?visible.map(renderCard).join(''):'<div class="empty">No races match this state and source selection. Choose another state or source.</div>';
-  document.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>makePick(b.dataset.pick,Number(b.dataset.choice)));
+  bindPickButtons();
   document.querySelectorAll('[data-focus-race]').forEach(b=>b.onclick=()=>focusRace(b.dataset.focusRace));
-  renderMap(visible);renderScenarios(visible);
+  $('mapTooltip').hidden=true;
+  renderMap(visible);renderScenarios(visible);renderOverview(visible);renderDetail(visible);renderSpectrum(visible);
   window.history?.replaceState?.(null,'','#'+scenarioHash());
   renderSaved();
  }
@@ -184,6 +240,17 @@
  ['sourceMode','pollChoice','stateFilter','sortOrder','spread','mapLayer'].forEach(id=>$(id).onchange=render);$('weight').oninput=render;$('swing').oninput=render;
  $('cardsView').onclick=()=>{viewMode='cards';render();};$('mapView').onclick=()=>{viewMode='map';render();};
  $('resetAssumptions').onclick=()=>{$('weight').value='60';$('swing').value='0';$('spread').value='1';render();};
+ $('closeRaceDetail').onclick=()=>{detailOpen=false;render();};
+ $('mapSearch').oninput=()=>{
+  const value=$('mapSearch').value.trim().toLowerCase(),results=races.filter(r=>r.tab===tab&&[r.state,...r.candidates.map(c=>c.name)].some(s=>s.toLowerCase().includes(value)));
+  $('mapSearchResults').hidden=!value;
+  $('mapSearchResults').innerHTML=results.length?results.map(r=>'<button data-search-race="'+esc(r.id)+'">'+esc(r.state)+'<span>'+esc(r.candidates.map(c=>c.name).join(' / '))+'</span></button>').join(''):'<p>No tracked race found.</p>';
+  document.querySelectorAll('[data-search-race]').forEach(b=>b.onclick=()=>{
+   $('stateFilter').value='all';if($('sourceMode').value==='single')$('sourceMode').value='combined';
+   $('mapSearch').value='';$('mapSearchResults').hidden=true;focusRace(b.dataset.searchRace);
+  });
+ };
+ document.addEventListener?.('keydown',event=>{if(event.key==='Escape'){$('mapTooltip').hidden=true;$('mapSearchResults').hidden=true;detailOpen=false;render();}});
  $('scenarioLink').onclick=async()=>{try{
   const url=new URL(window.location.href);url.hash=scenarioHash();
   if(!navigator.clipboard)throw Error('Clipboard unavailable; copy the current address from your browser.');
