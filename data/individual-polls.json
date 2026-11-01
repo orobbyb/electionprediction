@@ -1,17 +1,217 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-11-01T00:55:24Z",
+  "fetchedAt": "2026-11-01T10:01:55Z",
   "coverage": "Two recent individual polls per tracked Senate average, as listed by RCP. Not exhaustive; sample sizes and original questionnaires have not been collected. These records have their own timestamps and are not refreshed by changes to source-data.json.",
   "polls": [
-    {"id":"tx-quantus-1028","raceId":"texas|senate","pollster":"Quantus Insights","fieldStart":"2026-10-26","publishedAt":"2026-10-28","status":"verified","sourceUrl":"https://www.realclearpolling.com/polls/senate/general/2026/texas/talarico-vs-paxton","shares":[{"name":"Talarico","value":48},{"name":"Paxton","value":49}]},
-    {"id":"tx-tsu-1025","raceId":"texas|senate","pollster":"TSU/YouGov","fieldStart":"2026-10-21","publishedAt":"2026-10-25","status":"verified","sourceUrl":"https://www.realclearpolling.com/polls/senate/general/2026/texas/talarico-vs-paxton","shares":[{"name":"Talarico","value":49},{"name":"Paxton","value":47}]},
-    {"id":"oh-suffolk-1026","raceId":"ohio|senate","pollster":"Suffolk University","fieldStart":"2026-10-21","publishedAt":"2026-10-26","status":"verified","sourceUrl":"https://www.realclearpolling.com/polls/senate/special-election/2026/ohio/husted-vs-brown","shares":[{"name":"Brown","value":47},{"name":"Husted","value":44}]},
-    {"id":"oh-insider-1022","raceId":"ohio|senate","pollster":"InsiderAdvantage","fieldStart":"2026-10-21","publishedAt":"2026-10-22","status":"verified","sourceUrl":"https://www.realclearpolling.com/polls/senate/special-election/2026/ohio/husted-vs-brown","shares":[{"name":"Brown","value":47},{"name":"Husted","value":44}]},
-    {"id":"mi-rasmussen-1029","raceId":"michigan|senate","pollster":"Rasmussen Reports","fieldStart":"2026-10-28","publishedAt":"2026-10-29","status":"verified","sourceUrl":"https://www.realclearpolling.com/polls/senate/general/2026/michigan/rogers-vs-el-sayed","shares":[{"name":"El-Sayed","value":49},{"name":"Rogers","value":44}]},
-    {"id":"mi-cbs-1027","raceId":"michigan|senate","pollster":"CBS News/Mitchell","fieldStart":"2026-10-26","publishedAt":"2026-10-27","status":"verified","sourceUrl":"https://www.realclearpolling.com/polls/senate/general/2026/michigan/rogers-vs-el-sayed","shares":[{"name":"El-Sayed","value":51},{"name":"Rogers","value":44}]},
-    {"id":"ia-coefficient-1028","raceId":"iowa|senate","pollster":"co/efficient","fieldStart":"2026-10-28","publishedAt":"2026-10-28","status":"verified","sourceUrl":"https://www.realclearpolling.com/polls/senate/general/2026/iowa/turek-vs-hinson","shares":[{"name":"Turek","value":46},{"name":"Hinson","value":48}]},
-    {"id":"ia-insider-1022","raceId":"iowa|senate","pollster":"InsiderAdvantage","fieldStart":"2026-10-21","publishedAt":"2026-10-22","status":"verified","sourceUrl":"https://www.realclearpolling.com/polls/senate/general/2026/iowa/turek-vs-hinson","shares":[{"name":"Turek","value":45},{"name":"Hinson","value":47}]},
-    {"id":"me-marist-1025","raceId":"maine|senate","pollster":"Marist","fieldStart":"2026-10-22","publishedAt":"2026-10-25","status":"verified","sourceUrl":"https://www.realclearpolling.com/polls/senate/general/2026/collins-vs-jackson","shares":[{"name":"Jackson","value":49},{"name":"Collins","value":47}]},
-    {"id":"me-cnn-1026","raceId":"maine|senate","pollster":"CNN","fieldStart":"2026-10-20","publishedAt":"2026-10-26","status":"verified","sourceUrl":"https://www.realclearpolling.com/polls/senate/general/2026/collins-vs-jackson","shares":[{"name":"Jackson","value":49},{"name":"Collins","value":45}]}
+    {
+      "id": "tx-quantus-1028",
+      "raceId": "texas|senate",
+      "pollster": "Quantus Insights",
+      "fieldStart": "2026-10-26",
+      "publishedAt": "2026-10-28",
+      "status": "verified",
+      "sourceUrl": "https://www.realclearpolling.com/polls/senate/general/2026/texas/talarico-vs-paxton",
+      "shares": [
+        {
+          "name": "Talarico",
+          "value": 48
+        },
+        {
+          "name": "Paxton",
+          "value": 49
+        }
+      ],
+      "fetchedAt": "2026-11-01T10:01:55Z",
+      "lastAttemptedAt": "2026-11-01T10:01:55Z"
+    },
+    {
+      "id": "tx-tsu-1025",
+      "raceId": "texas|senate",
+      "pollster": "TSU/YouGov",
+      "fieldStart": "2026-10-21",
+      "publishedAt": "2026-10-25",
+      "status": "verified",
+      "sourceUrl": "https://www.realclearpolling.com/polls/senate/general/2026/texas/talarico-vs-paxton",
+      "shares": [
+        {
+          "name": "Talarico",
+          "value": 49
+        },
+        {
+          "name": "Paxton",
+          "value": 47
+        }
+      ],
+      "fetchedAt": "2026-11-01T10:01:55Z",
+      "lastAttemptedAt": "2026-11-01T10:01:55Z"
+    },
+    {
+      "id": "oh-suffolk-1026",
+      "raceId": "ohio|senate",
+      "pollster": "Suffolk University",
+      "fieldStart": "2026-10-21",
+      "publishedAt": "2026-10-26",
+      "status": "verified",
+      "sourceUrl": "https://www.realclearpolling.com/polls/senate/special-election/2026/ohio/husted-vs-brown",
+      "shares": [
+        {
+          "name": "Brown",
+          "value": 47
+        },
+        {
+          "name": "Husted",
+          "value": 44
+        }
+      ],
+      "fetchedAt": "2026-11-01T10:01:55Z",
+      "lastAttemptedAt": "2026-11-01T10:01:55Z"
+    },
+    {
+      "id": "oh-insider-1022",
+      "raceId": "ohio|senate",
+      "pollster": "InsiderAdvantage",
+      "fieldStart": "2026-10-21",
+      "publishedAt": "2026-10-22",
+      "status": "verified",
+      "sourceUrl": "https://www.realclearpolling.com/polls/senate/special-election/2026/ohio/husted-vs-brown",
+      "shares": [
+        {
+          "name": "Brown",
+          "value": 47
+        },
+        {
+          "name": "Husted",
+          "value": 44
+        }
+      ],
+      "fetchedAt": "2026-11-01T10:01:55Z",
+      "lastAttemptedAt": "2026-11-01T10:01:55Z"
+    },
+    {
+      "id": "mi-rasmussen-1029",
+      "raceId": "michigan|senate",
+      "pollster": "Rasmussen Reports",
+      "fieldStart": "2026-10-28",
+      "publishedAt": "2026-10-29",
+      "status": "verified",
+      "sourceUrl": "https://www.realclearpolling.com/polls/senate/general/2026/michigan/rogers-vs-el-sayed",
+      "shares": [
+        {
+          "name": "El-Sayed",
+          "value": 49
+        },
+        {
+          "name": "Rogers",
+          "value": 44
+        }
+      ],
+      "fetchedAt": "2026-11-01T10:01:55Z",
+      "lastAttemptedAt": "2026-11-01T10:01:55Z"
+    },
+    {
+      "id": "mi-cbs-1027",
+      "raceId": "michigan|senate",
+      "pollster": "CBS News/Mitchell",
+      "fieldStart": "2026-10-26",
+      "publishedAt": "2026-10-27",
+      "status": "verified",
+      "sourceUrl": "https://www.realclearpolling.com/polls/senate/general/2026/michigan/rogers-vs-el-sayed",
+      "shares": [
+        {
+          "name": "El-Sayed",
+          "value": 51
+        },
+        {
+          "name": "Rogers",
+          "value": 44
+        }
+      ],
+      "fetchedAt": "2026-11-01T10:01:55Z",
+      "lastAttemptedAt": "2026-11-01T10:01:55Z"
+    },
+    {
+      "id": "ia-coefficient-1028",
+      "raceId": "iowa|senate",
+      "pollster": "co/efficient",
+      "fieldStart": "2026-10-28",
+      "publishedAt": "2026-10-28",
+      "status": "verified",
+      "sourceUrl": "https://www.realclearpolling.com/polls/senate/general/2026/iowa/turek-vs-hinson",
+      "shares": [
+        {
+          "name": "Turek",
+          "value": 46
+        },
+        {
+          "name": "Hinson",
+          "value": 48
+        }
+      ],
+      "fetchedAt": "2026-11-01T10:01:55Z",
+      "lastAttemptedAt": "2026-11-01T10:01:55Z"
+    },
+    {
+      "id": "ia-insider-1022",
+      "raceId": "iowa|senate",
+      "pollster": "InsiderAdvantage",
+      "fieldStart": "2026-10-21",
+      "publishedAt": "2026-10-22",
+      "status": "verified",
+      "sourceUrl": "https://www.realclearpolling.com/polls/senate/general/2026/iowa/turek-vs-hinson",
+      "shares": [
+        {
+          "name": "Turek",
+          "value": 45
+        },
+        {
+          "name": "Hinson",
+          "value": 47
+        }
+      ],
+      "fetchedAt": "2026-11-01T10:01:55Z",
+      "lastAttemptedAt": "2026-11-01T10:01:55Z"
+    },
+    {
+      "id": "me-marist-1025",
+      "raceId": "maine|senate",
+      "pollster": "Marist",
+      "fieldStart": "2026-10-22",
+      "publishedAt": "2026-10-25",
+      "status": "verified",
+      "sourceUrl": "https://www.realclearpolling.com/polls/senate/general/2026/collins-vs-jackson",
+      "shares": [
+        {
+          "name": "Jackson",
+          "value": 49
+        },
+        {
+          "name": "Collins",
+          "value": 47
+        }
+      ],
+      "fetchedAt": "2026-11-01T10:01:55Z",
+      "lastAttemptedAt": "2026-11-01T10:01:55Z"
+    },
+    {
+      "id": "me-cnn-1026",
+      "raceId": "maine|senate",
+      "pollster": "CNN",
+      "fieldStart": "2026-10-20",
+      "publishedAt": "2026-10-26",
+      "status": "verified",
+      "sourceUrl": "https://www.realclearpolling.com/polls/senate/general/2026/collins-vs-jackson",
+      "shares": [
+        {
+          "name": "Jackson",
+          "value": 49
+        },
+        {
+          "name": "Collins",
+          "value": 45
+        }
+      ],
+      "fetchedAt": "2026-11-01T10:01:55Z",
+      "lastAttemptedAt": "2026-11-01T10:01:55Z"
+    }
   ]
 }
