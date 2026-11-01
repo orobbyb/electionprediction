@@ -3,11 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>My Election Notebook — Cards</title>
+<title>My Election Notebook — Maps &amp; Cards</title>
 <link rel="stylesheet" href="./board.css">
 <script defer src="./backup.js"></script>
 <script defer src="./forecast.js"></script>
 <script defer src="./board-data.js"></script>
+<script defer src="./state-paths.js"></script>
+<script defer src="./state-map.js"></script>
 <script defer src="./board.js"></script>
 </head>
 <body>
@@ -31,6 +33,20 @@
  <label>Sort<select id="sortOrder"><option value="close">Closest estimates first</option><option value="state">State / question order</option></select></label>
  <label id="weightControl">Base poll weight: <output id="weightLabel">60%</output><input id="weight" type="range" min="0" max="100" value="60" step="5"></label>
 </section>
+<section class="explorer-controls" id="explorerControls" aria-label="Map display">
+ <div class="segmented" role="group" aria-label="Race view"><button id="cardsView" aria-pressed="true">Cards</button><button id="mapView" aria-pressed="false">Map + cards</button></div>
+ <label id="mapLayerControl" hidden>Map colors<select id="mapLayer"><option value="model">Model estimates</option><option value="picks">My picks only</option></select></label>
+ <button id="scenarioLink">Copy scenario link</button>
+</section>
+<details class="assumptions" id="assumptionsPanel" open><summary>Explore assumptions · sensitivity analysis, not a validated forecast</summary>
+ <div class="controls">
+  <label>Democratic margin adjustment: <output id="swingLabel">0 pp</output><input id="swing" type="range" min="-6" max="6" step="0.5" value="0"></label>
+  <label>Polling uncertainty<select id="spread"><option value="0.75">0.75× base error</option><option value="1" selected>1× base error</option><option value="1.5">1.5× base error</option><option value="2">2× base error</option></select></label>
+  <button id="resetAssumptions">Reset assumptions</button>
+ </div>
+ <p class="mini">Positive margin adjustments favor Democrats; negative adjustments favor Republicans. The same adjustment applies to every modeled partisan race's polling input. It does not change Kalshi quotes or ballot questions, and it never changes your picks. This is a shared what-if assumption, not a fitted correlated-election simulation.</p>
+ <p class="mini">No chamber-control odds are shown: this shortlist is incomplete, and joint probabilities would require a separately validated model. Candidate effects and historical back-testing are not implemented.</p>
+</details>
 <p class="scope">Race state filters the location of the election, not the residence of traders. Kalshi public data has no trader-location field.</p>
 <details class="method"><summary>How the prototype works · assumptions and limitations</summary>
  <p>This is an experimental comparison tool, not a calibrated election forecast. Poll support is not a win probability. We convert the leading-candidate margin using a normal error model: base standard deviation 4 percentage points for an average, 6 for a single poll, widened with fieldwork age. These assumptions are unvalidated. Poll weight decays with a 14-day half-life; the two effective weights are normalized before blending. Market probabilities are normalized only for matched two-outcome quotes summing to 98–102%.</p>
@@ -38,7 +54,10 @@
  <p>Polls and markets overlap in information; blending does not treat them as independent evidence. Kalshi page snapshots do not include spread or liquidity, so no liquidity adjustment is claimed. Multi-candidate and ranked-choice contests show raw quotes, not a fabricated joint forecast. Candidate cards show the tracked field, not an exhaustive certified ballot. Individual polls are a small, separately dated selection listed by RCP, not a new poll average.</p>
  <p>Your selections, history, exports, and print report are independent of all model settings. Old saved races remain in “All my saved calls” and can be edited in the <a href="./legacy.html">legacy board</a>.</p>
 </details>
-<section id="racePanel" role="tabpanel" aria-labelledby="tab-senate"><p id="coverage"></p><div id="cards" class="cards"></div></section>
+<section id="racePanel" role="tabpanel" aria-labelledby="tab-senate"><p id="coverage"></p>
+ <section id="mapPanel" class="map-panel" hidden aria-label="Linked state map"><div class="section-heading"><h2 id="mapTitle">Senate · model estimates</h2><span class="mini">Click or focus a tracked state</span></div><div id="mapCanvas"></div><div id="mapLegend" class="map-legend"></div><div id="mapStateButtons" class="state-callouts" aria-label="Tracked state shortcuts, including small states"></div><p id="mapSelection" role="status" aria-live="polite"></p></section>
+ <section id="scenarioPanel" class="scenario-panel" aria-label="Scenario comparison"><h2 id="scenarioTitle">Race sensitivity</h2><p id="scenarioSubtitle" class="mini"></p><div id="scenarioComparison" class="scenario-comparison"></div></section>
+ <div id="cards" class="cards"></div></section>
 <section class="saved"><div class="section-heading"><h2>All my saved calls</h2><span id="savedCount"></span></div><div id="savedCalls"></div></section>
 <details class="history"><summary id="historySummary">My prediction history</summary><div id="historyList"></div></details>
 <footer>Saved in this browser only. Back up before switching between Render and GitHub Pages. Your selections are never committed to GitHub. <a href="./legacy.html">Other races / legacy board</a></footer>

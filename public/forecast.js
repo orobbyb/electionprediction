@@ -1,6 +1,6 @@
 /* Transparent prototype model, not historically calibrated. No network or storage. */
 (function(root){
- const VERSION='prototype-1';
+ const VERSION='prototype-2-sensitivity';
  function parseShares(text=''){
   return [...text.matchAll(/(?:^|;)\s*([^;%]+?)\s+(\d+(?:\.\d+)?)%/g)].map(m=>({name:m[1].trim(),value:Number(m[2])})).filter(x=>Number.isFinite(x.value)&&x.value>=0&&x.value<=100);
  }
@@ -15,7 +15,9 @@
  function align(shares,candidates){
   return candidates.map(c=>{const found=shares.filter(s=>c.aliases.some(a=>a.toLowerCase()===s.name.toLowerCase()));return found.length===1?found[0].value:null;});
  }
- function estimate(race,records={},mode='combined',weight=.6,poll=null,now=Date.now()){
+ function estimate(race,records={},mode='combined',weight=.6,poll=null,now=Date.now(),scenario={}){
+  const swing=Number(scenario.swing??0),spread=Number(scenario.spread??1);
+  if(!Number.isFinite(swing)||Math.abs(swing)>10||!Number.isFinite(spread)||spread<.5||spread>3)throw Error('Invalid scenario assumptions.');
   const result={version:VERSION,label:'Not scored',probabilities:null,reason:'No usable source for this view.',pollShares:null,marketShares:null,effectiveWeights:null};
   if(!Number.isFinite(weight)||weight<0||weight>1)throw Error('Poll weight must be between 0 and 1.');
   const candidates=race.candidates;
@@ -33,8 +35,11 @@
   let pollP=null;
   if(havePoll){
    const ageDays=Math.max(0,(now-Date.parse(pollRecord.publishedAt))/86400000);
-   const sigma=Math.sqrt((poll?6:4)**2+Math.min(ageDays,35)*.25);
-   pollP=cdf((pollShares[0]-pollShares[1])/sigma);result.sigma=sigma;
+   const sigma=Math.sqrt((poll?6:4)**2+Math.min(ageDays,35)*.25)*spread;
+   const direction=candidates[0].party==='Democrat'?1:candidates[0].party==='Republican'?-1:0;
+   const margin=pollShares[0]-pollShares[1]+direction*swing;
+   pollP=cdf(margin/sigma);result.sigma=sigma;result.pollMargin=margin;
+   result.pollingInterval=[margin-1.644854*sigma,margin+1.644854*sigma];
   }
   const marketP=haveMarket?market[0]/(market[0]+market[1]):null;
   let p=null;

@@ -27,6 +27,16 @@ jobs:
           node-version: '22'
       - run: npm test
       - run: npm run build:pages
+      - name: Install browser checks
+        run: npm install --no-save --package-lock=false playwright@1.62.1
+      - run: npx playwright install --with-deps chromium
+      - name: Verify explorer in Chromium
+        run: node tests/explorer-browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: explorer-browser-checks
+          path: test-results/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

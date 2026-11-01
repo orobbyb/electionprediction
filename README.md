@@ -2,7 +2,7 @@
 
 ## Card dashboard
 
-The landing page is now a card dashboard, not a map. It has Senate, Governor,
+The landing page is a card dashboard with an optional linked map. It has Senate, Governor,
 Missouri ballot questions, and Massachusetts ballot questions tabs. The
 shortlist contains 13 previously tracked races, five certified Missouri
 November measures, and nine Massachusetts statewide questions. It is not a
@@ -28,6 +28,28 @@ to 4 percentage points for an average or 6 for one poll, widened by fieldwork
 age. These assumptions are unvalidated and NOT a historically calibrated
 forecast. Filters are analysis views; they never change personal predictions.
 See `tests/forecast.test.js` and `tests/board-ui.test.js`.
+
+### Linked map and sensitivity explorer
+
+Senate and Governor tabs offer Cards or Map + cards. The map uses the existing
+public-domain state geometry, with labels inside the same SVG coordinate system.
+Select a tracked state by mouse, keyboard, or the state shortcut buttons to focus
+its card. Grey states are outside the current filtered shortlist, not a claim
+that no election occurs there. Hatching means no eligible model estimate.
+Model coloring shows the favored candidate's party and probability; My picks
+coloring shows only saved selections, never a model-generated call.
+
+The assumptions panel adds a shared Democratic/Republican polling-margin shift
+and an uncertainty multiplier. Neither changes market quotes, issue forecasts,
+or saved predictions. Baseline and +/-2-point comparisons use the selected race
+and source mode. Copy scenario link shares only analysis settings; it never
+embeds personal selections or history. The recipient sees their own local picks.
+
+ElectIt's inspectable-assumptions workflow inspired this explorer, not copied
+source code or branding. Its live JavaScript was unavailable for inspection.
+This is not a reimplementation of LogisTiCC, a joint correlated simulation,
+a validated forecast, or a chamber-control model. Backtesting and calibration
+remain future work. The displayed polling-margin interval is assumption-based.
 
 Only eligible numeric sources are modeled. Stale/unavailable sources, fetches
 older than 48 hours, and polls ending more than 35 days ago are excluded.
@@ -88,8 +110,10 @@ The workflow tests the backup code, builds `_site` from `public/` and `data/`,
 and publishes that artifact. Only source data and public app assets are
 published, never browser predictions. `npm run build:pages` builds the same
 artifact locally. `npm test` runs the dependency-free regression tests.
-Optional browser checks: install Playwright/Chromium in your development
-environment and run `node tests/browser.cjs` after building.
+Publishing also runs Playwright browser checks for map geometry, linked cards,
+scenario controls, prediction preservation, and phone-width layout. Screenshots
+are uploaded as the `explorer-browser-checks` workflow artifact. To run locally,
+install Playwright/Chromium and run `node tests/explorer-browser.cjs` after building.
 
 ### Move your predictions safely
 
