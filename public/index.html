@@ -31,12 +31,13 @@ input,select,textarea{width:100%;border:1px solid #d9dce3;border-radius:8px;padd
   <section class="panel map-panel"><div class="map-head"><div><h2 id="raceViewTitle">Click a state to make a call</h2><p class="map-hint" id="raceViewHint">Click a state with an active 2026 race. Gray states are not editable because neither statewide race is on the board.</p></div><div class="view-toggle" aria-label="Race view"><button id="mapViewBtn" class="active" type="button">Map view</button><button id="listViewBtn" type="button">List view</button></div></div><div class="map-tools"><span class="tool-label">Board</span><button class="active" type="button">My forecast</button><button type="button" onclick="focusBoard('all')">All races</button><button type="button" onclick="focusBoard('Senate')">Senate</button><button type="button" onclick="focusBoard('Governor')">Governor</button><button type="button" onclick="focusBoard('House')">House</button><span class="tool-label" style="margin-left:10px">Click mode</span><button id="cycleModeBtn" class="active" type="button" onclick="setMapMode('cycle')">Cycle color</button><button id="pickModeBtn" type="button" onclick="setMapMode('pick')">Pick candidate</button><label class="hint" style="margin-left:auto">Race: <select id="mapOffice" style="width:auto;min-width:110px;padding:6px 8px;font-size:11px"><option>Governor</option><option>Senate</option></select></label></div><div class="map-legend"><span class="legend-key"><i class="dot dem"></i> Democrat</span><span class="legend-key"><i class="dot rep"></i> Republican</span><span class="legend-key"><i class="dot none"></i> No call</span><span class="legend-key"><i class="dot none"></i> No 2026 race</span></div><div class="svg-map-wrap" id="mapView"><svg class="svg-map" id="usMap" viewBox="0 0 960 600" role="img" aria-label="Interactive map of the United States"></svg></div><div class="list-view" id="listView"><div class="list-toolbar"><p>Click a candidate once to save or replace your call. Races are grouped alphabetically by state.</p><button class="secondary" id="addHouseBtn" type="button">+ Add House race</button></div><div class="list-groups" id="listGroups"></div></div></section>
   <section class="panel"><div class="panel-head"><h2>Current calls</h2><div class="toolbar"><input id="search" placeholder="Search race or winnerâ¦" /><select id="filterType"><option value="all">All race types</option><option>Senate</option><option>Governor</option><option>House</option></select><select id="filterConfidence"><option value="all">Any confidence</option><option>High</option><option>Medium</option><option>Low</option></select></div></div><div class="race-grid" id="raceGrid"></div></section>
   <section class="panel"><div class="panel-head"><div><h2>Prediction history</h2><div class="hint">Every save creates a timestamped snapshot, so you can see how your thinking changed.</div></div><button class="secondary" id="clearBtn">Clear all data</button></div><div class="history-wrap"><table class="history"><thead><tr><th>Date</th><th>Race</th><th>Your call</th><th>Notes</th><th></th></tr></thead><tbody id="historyBody"></tbody></table></div></section>
-  <div class="footer-note">Your data is saved in this browser. Use Export history for a backup.</div>
+  <div class="footer-note">Saved only in this browser, not on GitHub. Moving from Render? Export your board there, then import it here.<br><button class="secondary" id="restoreBackupBtn" type="button">Undo last import</button><p id="backupStatus" role="status" aria-live="polite"></p></div>
 </main>
 <section id="printReport" class="print-report"></section>
 
 <div class="modal" id="modal"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle">Add prediction</h2><button class="close" id="closeModal">Ã</button></div><div class="quick-title">Quick pick a winner</div><div class="quick-office"><button type="button" data-office="Governor">Governor</button><button type="button" data-office="Senate">Senate</button><button type="button" data-office="House">House</button></div><div class="candidate-grid" id="candidateGrid"></div><div class="quick-title">Current outside indicators</div><div class="source-grid" id="sourceGrid"></div><form id="predictionForm"><input type="hidden" id="editId" /><details class="details"><summary>Optional details</summary><div class="form-grid"><div class="field"><label for="type">Race type</label><select id="type" required><option>Senate</option><option>Governor</option><option>House</option></select></div><div class="field"><label for="state">State</label><input id="state" placeholder="e.g., Pennsylvania" required /></div><div class="field"><label for="district">District / seat</label><input id="district" placeholder="e.g., At-large or PA-07" /></div><div class="field"><label for="date">Prediction date</label><input id="date" type="date" required /></div><div class="field wide"><label for="winner">Predicted winner</label><input id="winner" placeholder="Candidate name" required /></div><div class="field"><label for="party">Party</label><select id="party"><option value="Democrat">Democrat</option><option value="Republican">Republican</option><option value="Independent">Independent</option><option value="Other">Other</option></select></div><div class="field"><label for="confidence">Confidence</label><select id="confidence"><option>High</option><option selected>Medium</option><option>Low</option></select></div><div class="field full"><label for="notes">Reasoning / notes</label><textarea id="notes" placeholder="What is driving this call? Record evidence, assumptions, or what could change your mind."></textarea></div></div><div class="form-actions"><button type="button" class="secondary" id="cancelBtn">Cancel</button><button class="primary" type="submit">Save prediction</button></div></details></form></div></div>
-<script src="/state-paths.js"></script>
+<script src="./state-paths.js"></script>
+<script src="./backup.js"></script>
 <script>
 const KEY='my-midterm-prediction-board-v1';
 let data=JSON.parse(localStorage.getItem(KEY)||'{"predictions":[],"history":[]}');
@@ -156,10 +157,88 @@ $('mapViewBtn').onclick=()=>setView('map');$('listViewBtn').onclick=()=>setView(
 $('mapOffice').value=mapOffice;$('mapOffice').onchange=e=>{mapOffice=e.target.value;localStorage.setItem(KEY+'-map-office',mapOffice)};setMapMode(mapMode);
 $('type').onchange=renderCandidatePicker;$('state').oninput=renderCandidatePicker;$('quick-office-buttons');document.querySelectorAll('[data-office]').forEach(b=>b.onclick=()=>{$('type').value=b.dataset.office;renderCandidatePicker()});
 $('clearBtn').onclick=()=>{if(confirm('Delete all active predictions and history? This cannot be undone unless you exported a backup.')){data={predictions:[],history:[]};save()}};
-$('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='my-midterm-predictions.json';a.click();URL.revokeObjectURL(a.href)};
-$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const incoming=JSON.parse(r.result);if(!Array.isArray(incoming.predictions)||!Array.isArray(incoming.history))throw Error();if(confirm('Replace your current board with this imported backup?')){data=incoming;save()}}catch{alert('That file does not look like a prediction-board backup.')}};r.readAsText(f);e.target.value=''};
+function downloadBackup(text, filename) {
+ const url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');
+ a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+$('exportBtn').textContent='Export board';
+document.querySelector('label[for="importFile"]').firstChild.textContent='Import board';
+$('exportBtn').onclick=()=>{
+ try {downloadBackup(BoardBackup.serialize(data),'my-midterm-predictions-'+today()+'.json');
+ $('backupStatus').textContent='Backup exported: '+data.predictions.length+' predictions and '+data.history.length+' history entries.';}
+ catch(error){$('backupStatus').textContent='Export failed: '+error.message;}
+};
+$('importFile').onchange=async e=>{
+ const file=e.target.files[0];e.target.value='';if(!file)return;
+ try{
+  if(file.size>10*1024*1024)throw Error('Backup must be smaller than 10 MB.');
+  const incoming=BoardBackup.parse(await file.text());
+  if(!confirm('Import '+incoming.predictions.length+' predictions and '+incoming.history.length+' history entries? This replaces this browser board. A pre-import backup will be saved for Undo last import.'))return;
+  const previous=JSON.stringify(data);
+  // Persist before changing the displayed board; quota errors leave the board intact.
+  localStorage.setItem(KEY+'-pre-import',previous);
+  localStorage.setItem(KEY,JSON.stringify(incoming));
+  data=incoming;render();
+  $('backupStatus').textContent='Imported '+data.predictions.length+' predictions and '+data.history.length+' history entries. Your previous board is available with Undo last import.';
+ }catch(error){$('backupStatus').textContent='Import failed; your board was not replaced: '+error.message;}
+};
+$('restoreBackupBtn').onclick=()=>{
+ try{
+  const previous=localStorage.getItem(KEY+'-pre-import');
+  if(!previous){$('backupStatus').textContent='No pre-import backup is saved in this browser.';return;}
+  const restored=BoardBackup.parse(previous);
+  if(!confirm('Restore the board from before your last import? Export your current board first if you want to keep it.'))return;
+  localStorage.setItem(KEY,JSON.stringify(restored));data=restored;render();
+  $('backupStatus').textContent='Previous board restored.';
+ }catch(error){$('backupStatus').textContent='Could not restore: '+error.message;}
+};
 const standaloneSourceRender=renderSources;
-renderSources=async function(){standaloneSourceRender();const state=$('state').value.trim(),office=$('type').value;if(!state)return;try{const r=await fetch('/api/race-data?state='+encodeURIComponent(state)+'&office='+encodeURIComponent(office),{cache:'no-store'});const payload=await r.json();const cards=document.querySelectorAll('#sourceGrid .source-card');(payload.sources||[]).forEach(s=>{const card=document.querySelector(`#sourceGrid .source-card[data-source-key="${s.name==='Kalshi odds'?'kalshi':s.name==='RCP polls'?'rcp':s.name.includes('Sabato')?'sabato':'cook'}"]`);if(!card)return;card.querySelector('.source-value').textContent=s.value||'No verified snapshot yet';const when=s.fetchedAt?` Â· ${new Date(s.fetchedAt).toLocaleString([], {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}`:'';card.querySelector('small').textContent=(s.status||'status unknown')+when;if(s.note)card.querySelector('.source-value').title=s.note})}catch(e){document.querySelectorAll('#sourceGrid .source-value').forEach(x=>x.textContent='Data refresh unavailable')}};
+let sourceSnapshot=null,sourceLoad=null,sourceLoadedAt=0,sourceRequest=0;
+async function loadSourceSnapshot(){
+ if(sourceSnapshot&&Date.now()-sourceLoadedAt<60000)return sourceSnapshot;
+ if(!sourceLoad)sourceLoad=(async()=>{
+  const response=await fetch(new URL('./data/source-data.json',document.baseURI),{cache:'no-store'});
+  if(!response.ok)throw Error('Snapshot HTTP '+response.status);
+  const snapshot=await response.json();
+  if(snapshot.schemaVersion!==1||!snapshot.races||typeof snapshot.races!=='object')throw Error('Invalid source snapshot');
+  sourceSnapshot=snapshot;sourceLoadedAt=Date.now();return snapshot;
+ })().finally(()=>{sourceLoad=null});
+ return sourceLoad;
+}
+function showSourceRecords(snapshot,state,office,loadError){
+ const records=snapshot?.races?.[state.toLowerCase()+'|'+office.toLowerCase()]?.sources||{};
+ document.querySelectorAll('#sourceGrid .source-card').forEach(card=>{
+  const record=records[card.dataset.sourceKey]||{};
+  card.querySelector('.source-value').textContent=record.value||'No verified snapshot for this race';
+  const details=[loadError?'stale (refresh unavailable)':record.status||'unavailable'];
+  if(record.fetchedAt)details.push('Fetched '+new Date(record.fetchedAt).toLocaleString());
+  if(record.publishedAt)details.push('Published '+record.publishedAt);
+  if(record.lastAttemptedAt)details.push('Last attempted '+new Date(record.lastAttemptedAt).toLocaleString());
+  if(record.error)details.push(record.error);
+  if(loadError)details.push(loadError.message);
+  if(record.note)details.push(record.note);
+  card.querySelector('small').textContent=details.join(' · ');
+  const link=card.querySelector('a');const target=record.url||sourceLinks[card.dataset.sourceKey];
+  if(target&&/^https:\/\//.test(target))link.href=target;
+ });
+}
+renderSources=async function(){
+ standaloneSourceRender();
+ const request=++sourceRequest,state=$('state').value.trim(),office=$('type').value;
+ if(!state){document.querySelectorAll('#sourceGrid .source-value').forEach(x=>x.textContent='Select a state to view sources');return;}
+ try{
+  const snapshot=await loadSourceSnapshot();if(request!==sourceRequest)return;
+  showSourceRecords(snapshot,state,office);
+  $('summarySnapshot').textContent=snapshot.generatedAt?new Date(snapshot.generatedAt).toLocaleDateString():'No verified snapshot';
+ }catch(error){
+  if(request!==sourceRequest)return;
+  showSourceRecords(sourceSnapshot,state,office,error);
+ }
+};
+loadSourceSnapshot().then(snapshot=>{
+ $('summarySnapshot').textContent=snapshot.generatedAt?new Date(snapshot.generatedAt).toLocaleDateString():'No verified snapshot';
+}).catch(()=>{$('summarySnapshot').textContent='Snapshot unavailable';});
 function reportRows(){return [...data.predictions].sort((a,b)=>(a.state+a.type).localeCompare(b.state+b.type))}
 function reportChoice(p){if(!p)return 'â';const cls=p.party==='Democrat'?'report-dem':p.party==='Republican'?'report-rep':'report-other';return `<span class="${cls}">${esc(p.winner)} (${p.party==='Democrat'?'D':p.party==='Republican'?'R':'O'})</span>`}
 function buildPrintReport(){const ps=reportRows(),now=new Date().toLocaleString(undefined,{month:'long',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});const mapHtml=states.map(([abbr,state,col,row])=>{const gov=ps.find(p=>p.state===state&&p.type==='Governor'),sen=ps.find(p=>p.state===state&&p.type==='Senate'),house=ps.filter(p=>p.state===state&&p.type==='House'),all=[gov,sen,...house].filter(Boolean),choice=(p,label)=>`<div class="choice-line ${p.party==='Democrat'?'dem':p.party==='Republican'?'rep':'other'}"><b>${label}</b> ${esc(p.winner)}</div>`;return `<div class="report-state ${all.length?'selected':''}" style="left:calc(${(col-1)*8.3333}% + 2px);top:${(row-1)*58+10}px"><b class="abbr">${abbr}</b>${gov?choice(gov,'G'):''}${sen?choice(sen,'S'):''}${house.map(p=>choice(p,'H')).join('')}</div>`}).join('');$('printReport').innerHTML=`<h1>My 2026 Midterm Forecast</h1><div class="report-sub">Final-decision report Â· Generated ${esc(now)}</div><div class="report-summary"><div class="report-stat"><strong>${ps.filter(p=>p.type==='Senate').length}</strong><span>Senate calls</span></div><div class="report-stat"><strong>${ps.filter(p=>p.type==='Governor').length}</strong><span>Governor calls</span></div><div class="report-stat"><strong>${ps.filter(p=>p.type==='House').length}</strong><span>House calls</span></div><div class="report-stat"><strong>${ps.length}</strong><span>Total calls</span></div></div><div class="report-section">Forecast snapshot</div><div class="report-map">${mapHtml}</div><div class="report-footer">Private forecast notebook Â· Your predictions only Â· G = Governor, S = Senate, H = House. Blue = Democratic; red = Republican.</div>`}

@@ -54,6 +54,9 @@ async function send(res, status, body, type='text/plain; charset=utf-8') { res.w
 const mime = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8'};
 const server = createServer(async (req,res)=>{
   try {
+    if (new URL(req.url, `http://localhost:${port}`).pathname === '/data/source-data.json') {
+      return send(res,200,await readFile(sourceDataFile),'application/json; charset=utf-8');
+    }
     if (req.url.startsWith('/api/race-data')) return send(res,200,JSON.stringify(await raceData(req.url)),'application/json; charset=utf-8');
     const pathname = normalize(new URL(req.url, `http://localhost:${port}`).pathname);
     const file = join(root, pathname === '/' ? 'index.html' : pathname.replaceAll('/',''));

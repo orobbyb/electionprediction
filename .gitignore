@@ -9,3 +9,8 @@ node_modules/
 # OS/editor files
 .DS_Store
 .vscode/
+
+# Generated static build and browser test artifacts
+_site/
+test-results/
+playwright-report/
