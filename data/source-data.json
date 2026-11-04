@@ -1,24 +1,25 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-03T10:03:17Z",
+  "generatedAt": "2026-11-04T10:00:10Z",
   "updatedBy": "daily-election-data-refresh",
   "refresh": {
-    "attemptedAt": "2026-11-03T10:03:17Z",
-    "notes": "Verified 12 numeric RCP averages and the Vermont Governor rating from official current race pages and maps. Nebraska Senate changed from Leans GOP to Toss Up on Nov 2 and now has a published RCP average; Nevada Governor also now has a published average. Latest expanded race tables are preferred over lagging indexed snippets. No Kalshi API prices were obtained (environment HTTP 403); Sabato and Cook pages returned HTTP 403. Their stored values and verification/publication dates were retained as stale, with updated attempt times. Individual-poll subset, candidates and personal history were not changed.",
+    "attemptedAt": "2026-11-04T10:00:10Z",
+    "phase": "post-election",
+    "notes": "Rechecked all 12 numeric RCP averages and the Vermont Governor rating. Iowa's archived average was revised from Hinson +0.2 to a 47.1% tie. RCP pages now show partial result rows; none were imported as polls, market prices, candidate picks or results. All 13 pre-election RCP records are marked historical/stale and excluded by the existing model's status eligibility rules. Publication/fieldwork dates were preserved. Kalshi API request was blocked with environment HTTP 403; Sabato and Cook returned HTTP 403. All 39 blocked-source values and original fetched/publication dates were retained, with updated attempt timestamps. Individual-poll subset, application code, candidates and personal history were not modified.",
     "failures": [
       {
         "source": "kalshi-api",
         "status": "blocked",
         "url": "https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=SENATETX-26&limit=100",
         "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale.",
-        "at": "2026-11-03T10:03:17Z"
+        "at": "2026-11-04T10:00:10Z"
       },
       {
         "source": "sabato",
         "status": "unavailable",
         "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
         "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
-        "at": "2026-11-03T10:03:17Z"
+        "at": "2026-11-04T10:00:10Z"
       },
       {
         "source": "cook",
@@ -29,81 +30,20 @@
           "https://www.cookpolitical.com/ratings/governor-race-ratings"
         ],
         "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained.",
-        "at": "2026-11-03T10:03:17Z"
+        "at": "2026-11-04T10:00:10Z"
       }
     ],
     "changes": [
       {
-        "race": "texas|senate",
-        "source": "rcp",
-        "previous": "Talarico 49.0%; Paxton 46.5%; Talarico +2.5; Rating: Toss Up",
-        "current": "Talarico 49.1%; Paxton 46.5%; Talarico +2.6; Rating: Toss Up"
-      },
-      {
-        "race": "ohio|senate",
-        "source": "rcp",
-        "previous": "Brown 48.9%; Husted 46.1%; Brown +2.8; Rating: Toss Up",
-        "current": "Brown 48.5%; Husted 45.7%; Brown +2.8; Rating: Toss Up"
-      },
-      {
-        "race": "michigan|senate",
-        "source": "rcp",
-        "previous": "El-Sayed 50.1%; Rogers 44.8%; El-Sayed +5.3; Rating: Toss Up",
-        "current": "El-Sayed 50.3%; Rogers 45.0%; El-Sayed +5.3; Rating: Toss Up"
-      },
-      {
         "race": "iowa|senate",
         "source": "rcp",
-        "previous": "Turek 46.5%; Hinson 46.8%; Hinson +0.3; Rating: Toss Up",
-        "current": "Turek 47.1%; Hinson 47.3%; Hinson +0.2; Rating: Toss Up"
+        "previous": "Turek 47.1%; Hinson 47.3%; Hinson +0.2; Rating: Toss Up",
+        "current": "Turek 47.1%; Hinson 47.1%; Tie; Rating: Toss Up",
+        "observedPhase": "post-election"
       },
       {
-        "race": "kansas|senate",
         "source": "rcp",
-        "previous": "Hamilton 49.8%; Marshall 46.2%; Hamilton +3.6; Rating: Toss Up",
-        "current": "Hamilton 50.1%; Marshall 46.0%; Hamilton +4.1; Rating: Toss Up"
-      },
-      {
-        "race": "alaska|senate",
-        "source": "rcp",
-        "previous": "Peltola 49.2%; Sullivan 47.8%; Peltola +1.4; Rating: Toss Up",
-        "current": "Peltola 49.2%; Sullivan 48.2%; Peltola +1.0; Rating: Toss Up"
-      },
-      {
-        "race": "nebraska|senate",
-        "source": "rcp",
-        "previous": "Leans GOP",
-        "current": "Osborn 45.0%; Ricketts 48.7%; Ricketts +3.7; Rating: Toss Up"
-      },
-      {
-        "race": "ohio|governor",
-        "source": "rcp",
-        "previous": "Acton 49.6%; Ramaswamy 44.9%; Acton +4.7; Rating: Toss Up",
-        "current": "Acton 49.6%; Ramaswamy 45.1%; Acton +4.5; Rating: Toss Up"
-      },
-      {
-        "race": "texas|governor",
-        "source": "rcp",
-        "previous": "Hinojosa 47.3%; Abbott 49.8%; Abbott +2.5; Rating: Toss Up",
-        "current": "Hinojosa 47.4%; Abbott 49.7%; Abbott +2.3; Rating: Toss Up"
-      },
-      {
-        "race": "nevada|governor",
-        "source": "rcp",
-        "previous": "Toss Up",
-        "current": "Ford 46.7%; Lombardo 44.7%; Ford +2.0; Rating: Toss Up"
-      },
-      {
-        "race": "georgia|governor",
-        "source": "rcp",
-        "previous": "Bottoms 47.3%; Jackson 48.3%; Jackson +1.0; Rating: Toss Up",
-        "current": "Bottoms 49.0%; Jackson 48.7%; Bottoms +0.3; Rating: Toss Up"
-      },
-      {
-        "race": "maine|senate",
-        "source": "rcp",
-        "previous": "Jackson 49.9%; Collins 46.6%; Jackson +3.3; Rating: Toss Up",
-        "current": "Jackson 50.2%; Collins 46.6%; Jackson +3.6; Rating: Toss Up"
+        "change": "Marked 13 pre-election records historical/stale; current forecast eligibility withheld after Election Day."
       }
     ]
   },
@@ -114,22 +54,26 @@
       "apiUrl": "https://api.elections.kalshi.com/trade-api/v2/markets",
       "status": "unavailable",
       "fetchedAt": "2026-10-31T08:55:43Z",
-      "lastAttemptedAt": "2026-11-03T10:03:17Z",
+      "lastAttemptedAt": "2026-11-04T10:00:10Z",
       "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
     },
     "rcp": {
       "name": "RCP polls",
       "url": "https://www.realclearpolling.com/maps/senate/2026/toss-up",
-      "status": "verified",
-      "fetchedAt": "2026-11-03T10:03:17Z",
-      "lastAttemptedAt": "2026-11-03T10:03:17Z"
+      "status": "stale",
+      "fetchedAt": "2026-11-04T10:00:10Z",
+      "lastAttemptedAt": "2026-11-04T10:00:10Z",
+      "staleReason": "historical-pre-election-data",
+      "temporalStatus": "historical",
+      "lastVerifiedAt": "2026-11-04T10:00:10Z",
+      "note": "Official pages remain accessible but now include results alongside pre-election polling. Stored records retain polling/rating data only and are excluded from current forecast inputs."
     },
     "sabato": {
       "name": "Sabato's Crystal Ball",
       "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
       "status": "unavailable",
       "fetchedAt": "2026-10-27T09:00:49Z",
-      "lastAttemptedAt": "2026-11-03T10:03:17Z",
+      "lastAttemptedAt": "2026-11-04T10:00:10Z",
       "note": "Senate ratings last verified Oct. 14, 2026; governor ratings last verified Oct. 22, 2026.",
       "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained."
     },
@@ -139,7 +83,7 @@
       "status": "unavailable",
       "fetchedAt": "2026-10-23T08:57:36Z",
       "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained.",
-      "lastAttemptedAt": "2026-11-03T10:03:17Z"
+      "lastAttemptedAt": "2026-11-04T10:00:10Z"
     }
   },
   "races": {
@@ -154,17 +98,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/texas/talarico-vs-paxton",
           "value": "Talarico 49.1%; Paxton 46.5%; Talarico +2.6; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-11-01",
-          "note": "Official RCP average fieldwork 2026-10-15 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-10-15 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "publishedDateType": "fieldwork-end",
           "fieldStart": "2026-10-15",
           "fieldEnd": "2026-11-01",
@@ -180,14 +124,18 @@
             }
           ],
           "kind": "average",
-          "verificationNote": "Direct race table and the official Texas Senate aggregate page include Poll Vault/Emerson and show Talarico +2.6; older indexed snippets lacking that poll show +2.5. The expanded current table is used."
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-08-26"
         },
@@ -198,7 +146,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-08-20",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -214,17 +162,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/special-election/2026/ohio/husted-vs-brown",
           "value": "Brown 48.5%; Husted 45.7%; Brown +2.8; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-11-01",
-          "note": "Official RCP average fieldwork 2026-10-15 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-10-15 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "publishedDateType": "fieldwork-end",
           "fieldStart": "2026-10-15",
           "fieldEnd": "2026-11-01",
@@ -239,14 +187,19 @@
               "value": 45.7
             }
           ],
-          "kind": "average"
+          "kind": "average",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-06-11"
         },
@@ -257,7 +210,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-04-13",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -273,17 +226,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/michigan/rogers-vs-el-sayed",
           "value": "El-Sayed 50.3%; Rogers 45.0%; El-Sayed +5.3; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-11-01",
-          "note": "Official RCP average fieldwork 2026-10-15 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-10-15 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "publishedDateType": "fieldwork-end",
           "fieldStart": "2026-10-15",
           "fieldEnd": "2026-11-01",
@@ -298,14 +251,19 @@
               "value": 45
             }
           ],
-          "kind": "average"
+          "kind": "average",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Leans Democratic",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-09-22"
         },
@@ -316,7 +274,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2025-02-11",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -332,17 +290,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/iowa/turek-vs-hinson",
-          "value": "Turek 47.1%; Hinson 47.3%; Hinson +0.2; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "value": "Turek 47.1%; Hinson 47.1%; Tie; Rating: Toss Up",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-11-01",
-          "note": "Official RCP average fieldwork 2026-10-13 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-10-13 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "publishedDateType": "fieldwork-end",
           "fieldStart": "2026-10-13",
           "fieldEnd": "2026-11-01",
@@ -354,17 +312,23 @@
             },
             {
               "name": "Hinson",
-              "value": 47.3
+              "value": 47.1
             }
           ],
-          "kind": "average"
+          "kind": "average",
+          "verificationNote": "The revised RCP Average row is 47.1%–47.1%, not the separate Results row. This revision was first observed after Election Day; the prior pre-election value is retained in Git history.",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-09-22"
         },
@@ -375,7 +339,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-08-20",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -391,17 +355,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/kansas/marshall-vs-hamilton",
           "value": "Hamilton 50.1%; Marshall 46.0%; Hamilton +4.1; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-11-01",
-          "note": "Official RCP average fieldwork 2026-10-13 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-10-13 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "publishedDateType": "fieldwork-end",
           "fieldStart": "2026-10-13",
           "fieldEnd": "2026-11-01",
@@ -416,14 +380,19 @@
               "value": 46
             }
           ],
-          "kind": "average"
+          "kind": "average",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-10-14"
         },
@@ -434,7 +403,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-10-06",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -450,17 +419,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi party-level race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/alaska/peltola-vs-sullivan",
           "value": "Peltola 49.2%; Sullivan 48.2%; Peltola +1.0; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-11-01",
-          "note": "Official RCP average fieldwork 2026-10-08 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-10-08 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "publishedDateType": "fieldwork-end",
           "fieldStart": "2026-10-08",
           "fieldEnd": "2026-11-01",
@@ -475,14 +444,19 @@
               "value": 48.2
             }
           ],
-          "kind": "average"
+          "kind": "average",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Leans Democratic",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-10-06"
         },
@@ -493,7 +467,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-07-01",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -509,17 +483,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/nebraska/ricketts-vs-osborn",
           "value": "Osborn 45.0%; Ricketts 48.7%; Ricketts +3.7; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-10-29",
-          "note": "Official RCP average fieldwork 2026-09-28 through 2026-10-29. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Map rating changed from Leans GOP to Toss Up on 2026-11-02. The quoted average covers Osborn and Ricketts only; no Burbank share was supplied and none was invented.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-09-28 through 2026-10-29. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Map rating changed from Leans GOP to Toss Up on 2026-11-02. The quoted average covers Osborn and Ricketts only; no Burbank share was supplied and none was invented. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "rating": "Toss Up",
           "kind": "average",
           "publishedDateType": "fieldwork-end",
@@ -536,14 +510,19 @@
           "fieldStart": "2026-09-28",
           "fieldEnd": "2026-10-29",
           "ratingPublishedAt": "2026-11-02",
-          "ratingUrl": "https://www.realclearpolling.com/maps/senate/2026/toss-up"
+          "ratingUrl": "https://www.realclearpolling.com/maps/senate/2026/toss-up",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Leans Republican",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-10-14"
         },
@@ -554,7 +533,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-04-13",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -570,17 +549,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/governor/general/2026/ohio/ramaswamy-vs-acton",
           "value": "Acton 49.6%; Ramaswamy 45.1%; Acton +4.5; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-11-01",
-          "note": "Official RCP average fieldwork 2026-10-09 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-10-09 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "publishedDateType": "fieldwork-end",
           "fieldStart": "2026-10-09",
           "fieldEnd": "2026-11-01",
@@ -595,14 +574,19 @@
               "value": 45.1
             }
           ],
-          "kind": "average"
+          "kind": "average",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Leans Democratic",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-10-22"
         },
@@ -613,7 +597,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-07-10",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -629,17 +613,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/governor/general/2026/texas/abbott-vs-hinojosa",
           "value": "Hinojosa 47.4%; Abbott 49.7%; Abbott +2.3; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-11-01",
-          "note": "Official RCP average fieldwork 2026-10-15 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-10-15 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "publishedDateType": "fieldwork-end",
           "fieldStart": "2026-10-15",
           "fieldEnd": "2026-11-01",
@@ -654,14 +638,19 @@
               "value": 49.7
             }
           ],
-          "kind": "average"
+          "kind": "average",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Leans Republican",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-09-22"
         },
@@ -672,7 +661,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-10-01",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -688,17 +677,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/governor/general/2026/nevada/lombardo-vs-ford",
           "value": "Ford 46.7%; Lombardo 44.7%; Ford +2.0; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-10-28",
-          "note": "Official RCP average fieldwork 2026-09-05 through 2026-10-28. publishedAt denotes fieldwork end for compatibility, not a separately verified release date.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-09-05 through 2026-10-28. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "rating": "Toss Up",
           "kind": "average",
           "shares": [
@@ -713,14 +702,19 @@
           ],
           "fieldStart": "2026-09-05",
           "fieldEnd": "2026-10-28",
-          "publishedDateType": "fieldwork-end"
+          "publishedDateType": "fieldwork-end",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-09-22"
         },
@@ -731,7 +725,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2025-01-23",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -747,17 +741,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/governor/general/2026/georgia/jackson-vs-lance-bottoms",
           "value": "Bottoms 49.0%; Jackson 48.7%; Bottoms +0.3; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-11-02",
-          "note": "Official RCP average fieldwork 2026-10-15 through 2026-11-02. publishedAt denotes fieldwork end for compatibility, not a separately verified release date.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-10-15 through 2026-11-02. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "publishedDateType": "fieldwork-end",
           "fieldStart": "2026-10-15",
           "fieldEnd": "2026-11-02",
@@ -772,14 +766,19 @@
               "value": 48.7
             }
           ],
-          "kind": "average"
+          "kind": "average",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-03-19"
         },
@@ -790,7 +789,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2025-01-23",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -806,27 +805,32 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/maps/governor/2026/toss-up",
           "value": "Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-11-01",
-          "note": "RCP Governor map records Vermont changing from Leans GOP to Toss Up on 2026-11-01. No published RCP average displayed; individual polls are not substituted.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "RCP Governor map records Vermont changing from Leans GOP to Toss Up on 2026-11-01. No published RCP average displayed; individual polls are not substituted. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "rating": "Toss Up",
           "kind": "rating-only",
-          "publishedDateType": "rating-change-date"
+          "publishedDateType": "rating-change-date",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Likely Republican",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2026-09-29"
         },
@@ -837,7 +841,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2026-10-13",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
@@ -853,17 +857,17 @@
           "fetchedAt": "2026-10-31T08:55:43Z",
           "publishedAt": null,
           "note": "Official Kalshi race market page; API endpoints blocked.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official public API request returned HTTP 403: Forbidden. Calls to this URL are not allowed. No API prices obtained; prior page-derived values retained as stale."
         },
         "rcp": {
           "url": "https://www.realclearpolling.com/polls/senate/general/2026/collins-vs-jackson",
           "value": "Jackson 50.2%; Collins 46.6%; Jackson +3.6; Rating: Toss Up",
-          "status": "verified",
-          "fetchedAt": "2026-11-03T10:03:17Z",
+          "status": "stale",
+          "fetchedAt": "2026-11-04T10:00:10Z",
           "publishedAt": "2026-11-01",
-          "note": "Official RCP average fieldwork 2026-10-16 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "note": "Official RCP average fieldwork 2026-10-16 through 2026-11-01. publishedAt denotes fieldwork end for compatibility, not a separately verified release date. Historical pre-election polling/rating, rechecked after Election Day; excluded from current forecast inputs. Results rows were not substituted.",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "publishedDateType": "fieldwork-end",
           "fieldStart": "2026-10-16",
           "fieldEnd": "2026-11-01",
@@ -878,14 +882,19 @@
               "value": 46.6
             }
           ],
-          "kind": "average"
+          "kind": "average",
+          "staleReason": "historical-pre-election-data",
+          "temporalStatus": "historical",
+          "electionDate": "2026-11-03",
+          "modelEligible": false,
+          "lastVerifiedAt": "2026-11-04T10:00:10Z"
         },
         "sabato": {
           "url": "https://centerforpolitics.org/crystalball/2026-rating-changes/",
           "value": "Toss Up",
           "status": "stale",
           "fetchedAt": "2026-10-27T09:00:49Z",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official 2026 rating-changes page returned HTTP 403 Forbidden; last verified values retained.",
           "publishedAt": "2025-10-14"
         },
@@ -896,7 +905,7 @@
           "fetchedAt": "2026-10-23T08:57:36Z",
           "publishedAt": "2025-10-14",
           "note": "Direct Cook ratings page returned HTTP 403; value verified from the indexed official race page.",
-          "lastAttemptedAt": "2026-11-03T10:03:17Z",
+          "lastAttemptedAt": "2026-11-04T10:00:10Z",
           "error": "Official Senate and Governor ratings pages returned HTTP 403 Forbidden; last verified values retained."
         }
       }
